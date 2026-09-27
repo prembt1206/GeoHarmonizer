@@ -80,6 +80,26 @@ export const MapLegend: React.FC<MapLegendProps> = ({ colorMode = 'confidence' }
               <span className="text-slate-600 dark:text-slate-400">Conflict / Topology Alert</span>
             </div>
           </div>
+
+          <div className="pt-1.5 border-t border-slate-200 dark:border-slate-800 space-y-1.5">
+            <div className="text-[10px] font-semibold text-cyan-500 uppercase">UAV Photogrammetry</div>
+            <div className="flex items-center gap-2">
+              <span className="w-3 h-0.5 border-t-2 border-dashed border-cyan-400"></span>
+              <span className="text-slate-600 dark:text-slate-400">UAV Flight Line (120m)</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <span className="w-2.5 h-2.5 rounded-full bg-cyan-300 border border-cyan-600"></span>
+              <span className="text-slate-600 dark:text-slate-400">Camera Station (45MP)</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <span className="w-2.5 h-2.5 rounded-full bg-yellow-300 border border-yellow-600"></span>
+              <span className="text-slate-600 dark:text-slate-400">DGPS Ground Control (GCP)</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <span className="w-3 h-3 rounded bg-emerald-500/20 border border-dashed border-emerald-500"></span>
+              <span className="text-slate-600 dark:text-slate-400">5cm Orthomosaic (ORI)</span>
+            </div>
+          </div>
         </div>
       )}
     </div>

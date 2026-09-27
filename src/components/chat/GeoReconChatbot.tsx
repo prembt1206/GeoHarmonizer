@@ -30,6 +30,7 @@ import {
 } from '../../services/geminiChatService';
 
 const SUGGESTED_PROMPTS = [
+  { label: '🛸 UAV Drone Survey', query: 'Explain how the 5cm UAV Drone photogrammetry survey, flight trajectory, and DGPS GCP calibration works in GeoRecon AI for Bengaluru cadastral validation.' },
   { label: '🔍 Explain P-0102 Conflict', query: 'Why does Parcel P-0102 have a boundary conflict and what is the recommended resolution?' },
   { label: '📐 Explain IoU Matching', query: 'How does Intersection over Union (IoU) and Hausdorff distance work in matching cadastral vs drone layers?' },
   { label: '⚠️ Topology Anomalies', query: 'What topology issues exist in the current Bengaluru dataset and how are slivers healed?' },

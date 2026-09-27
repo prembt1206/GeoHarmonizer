@@ -49,12 +49,14 @@ You assist GIS analysts, municipal officers, revenue officers, and SIH hackathon
    - PostGIS ST_SnapToGrid, ST_Difference, ST_Intersection for topology healing.
 3. **Indian Land Records Systems**: Bhoomi (Karnataka Revenue), SSLR (Survey, Settlement and Land Records), RTC (Pahani / Record of Rights), Khata Numbers, Municipal Property Tax IDs, CORS (Continuously Operating Reference Stations).
 4. **Current Testbed**: Bengaluru Urban Land Sector (Indiranagar / Domlur, EPSG:32643 UTM Zone 43N).
+5. **UAV Drone Photogrammetry Engine**: 5cm GSD Orthomosaics (ORI), Serpentine lawnmower flight grids at 120m AGL (80% forward, 75% side overlap), Zenmuse P1 45MP sensor, DGPS Ground Control Points (GCPs) with Trimble R12 / Survey of India CORS tie (<0.02m RMS), and automated SfM bundle adjustment.
 
 ### Interactive Action Links:
 Whenever your answer recommends viewing a specific view or parcel, you can include interactive action tags in your text:
 - [ACTION:NAVIGATE:conflict-center] (to inspect or resolve conflicts)
 - [ACTION:NAVIGATE:spatial-validation] (to inspect topology overlaps/slivers)
 - [ACTION:NAVIGATE:before-after] (to compare cadastral vs drone orthophoto)
+- [ACTION:NAVIGATE:interactive-map] (to inspect map with UAV drone flight trajectories & GCPs)
 - [ACTION:NAVIGATE:canonical-records] (to view finalized land registry)
 - [ACTION:NAVIGATE:analytics] (to view confidence distribution)
 - [ACTION:SELECT_PARCEL:P-0102] (replace with target parcel ID, e.g. P-0101, P-0102, P-0103)
@@ -203,6 +205,34 @@ export const geminiChatService = {
     appContext: AppContextData
   ): { text: string; actions: ChatMessage['actions'] } {
     const q = query.toLowerCase();
+
+    if (q.includes('drone') || q.includes('uav') || q.includes('survey') || q.includes('photogrammetry') || q.includes('ortho')) {
+      return {
+        text: `### UAV Drone Photogrammetry Survey Engine (SVAMITVA Standards)
+GeoRecon AI incorporates high-precision UAV aerial photogrammetry adhering to **Survey of India SVAMITVA Guidelines & DGCA Urban Mapping SOP**:
+
+1. **Active Missions**:
+   - **Mission 1 (Indiranagar / Domlur - Ward 112)**: 384 photos, 120m AGL, **4.8cm GSD**, 18.5 Ha coverage, 6 DGPS Ground Control Points (GCPs).
+   - **Mission 2 (Ulsoor Lake Buffer - Ward 90)**: 290 photos, 110m AGL, **4.2cm GSD**, 14.2 Ha wetland eco-buffer zone.
+2. **Flight Specifications**:
+   - **Hardware**: DJI Matrice 300 RTK + Zenmuse P1 (45MP Full-Frame sensor, 35mm lens).
+   - **Overlap**: 80% Forward / 75% Side overlap in serpentine grid pattern.
+   - **Positioning**: Onboard PPK/RTK with Survey of India CORS network reference.
+3. **Photogrammetric Accuracy**:
+   - **Bundle Adjustment RMS**: 0.018m (1.8cm).
+   - **SfM Reprojection Error**: 0.34 pixels.
+   - **GCP Calibration**: DGPS Ground Control Points with sub-1.5cm residual error.
+4. **Interactive Features on Map**:
+   - Toggle UAV Flight Path Grid & Takeoff Pad.
+   - Click Exposure Stations for raw camera metadata (pitch, roll, yaw, shutter speed).
+   - Click DGPS GCP benchmark markers for elevation & residual error.
+   - Live UAV Flight Simulation with real-time Telemetry HUD.`,
+        actions: [
+          { type: 'NAVIGATE', label: 'Open Drone Map Survey', payload: 'interactive-map' },
+          { type: 'NAVIGATE', label: 'Before/After Comparison', payload: 'before-after' }
+        ]
+      };
+    }
 
     if (q.includes('conflict') || q.includes('p-0102') || q.includes('dispute')) {
       return {

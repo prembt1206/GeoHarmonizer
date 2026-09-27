@@ -25,9 +25,24 @@ import {
   BookOpen,
   X,
   ExternalLink,
-  ShieldCheck
+  ShieldCheck,
+  Camera,
+  Target,
+  Play,
+  Pause,
+  RotateCcw,
+  Radio,
+  Plane,
+  Eye,
+  Activity
 } from 'lucide-react';
 import { MapLegend } from './MapLegend';
+import {
+  INDIRANAGAR_DRONE_MISSION,
+  ULSOOR_DRONE_MISSION,
+  ALL_DRONE_MISSIONS,
+  DroneMission
+} from '../../data/droneSurveyData';
 
 export interface BengaluruLandmark {
   id: string;
@@ -416,11 +431,22 @@ export const InteractiveMap: React.FC<InteractiveMapProps> = ({
   const [isExamplesDrawerOpen, setIsExamplesDrawerOpen] = useState(false);
   const [exampleFilter, setExampleFilter] = useState<'all' | 'encroachment' | 'boundary' | 'khata' | 'infrastructure'>('all');
 
+  // Drone Survey State
+  const [isDroneDrawerOpen, setIsDroneDrawerOpen] = useState(false);
+  const [activeDroneMission, setActiveDroneMission] = useState<DroneMission>(INDIRANAGAR_DRONE_MISSION);
+  const [isDroneFlying, setIsDroneFlying] = useState(false);
+  const [droneFlightIndex, setDroneFlightIndex] = useState(0);
+  const droneMarkerRef = useRef<L.Marker | null>(null);
+
   // Layer visibility toggles
   const [layersVisibility, setLayersVisibility] = useState({
     harmonizedParcels: true,
     cadastral: true,
     municipal: true,
+    droneFlightPath: true,
+    droneCameras: true,
+    droneGcps: true,
+    droneOrtho: true,
     droneOri: true,
     gnssPoints: true,
     conflictMarkers: true
@@ -785,6 +811,120 @@ export const InteractiveMap: React.FC<InteractiveMapProps> = ({
       markerLayersRef.current?.addLayer(heritageZone);
     }
 
+    // 5. Render UAV Drone Photogrammetry Mission Layers
+    if (markerLayersRef.current) {
+      // 5a. Serpentine Flight Path Grid
+      if (layersVisibility.droneFlightPath) {
+        const flightPathLine = L.polyline(activeDroneMission.flightPath, {
+          color: '#06b6d4',
+          weight: 2.5,
+          dashArray: '8, 6',
+          opacity: 0.95
+        });
+        flightPathLine.bindTooltip(`
+          <strong>🛸 UAV Survey Flight Line: ${activeDroneMission.id}</strong><br/>
+          Mission: ${activeDroneMission.name}<br/>
+          Altitude: ${activeDroneMission.flightAltitudeM}m AGL | GSD: ${activeDroneMission.gsdCm} cm/px<br/>
+          Overlap: ${activeDroneMission.forwardOverlap}% Forward / ${activeDroneMission.sideOverlap}% Side
+        `);
+        markerLayersRef.current.addLayer(flightPathLine);
+
+        // Takeoff / Home Pad Marker
+        const padMarker = L.circleMarker(activeDroneMission.takeoffPoint, {
+          radius: 9,
+          color: '#059669',
+          fillColor: '#10b981',
+          fillOpacity: 0.95,
+          weight: 2
+        });
+        padMarker.bindPopup(`
+          <div style="font-family: sans-serif; font-size: 11px; padding: 2px;">
+            <div style="font-weight: 800; color: #059669; font-size: 12px;">🛸 UAV Launch & Recovery Pad (RTH)</div>
+            <div style="margin-top: 4px; color: #475569; line-height: 1.4;">
+              <strong>Mission:</strong> ${activeDroneMission.id}<br/>
+              <strong>UAV Model:</strong> ${activeDroneMission.droneModel}<br/>
+              <strong>Pilot:</strong> ${activeDroneMission.pilotName}<br/>
+              <strong>DGCA UIN:</strong> ${activeDroneMission.dgcaUin}
+            </div>
+          </div>
+        `);
+        markerLayersRef.current.addLayer(padMarker);
+      }
+
+      // 5b. Camera Shutter Exposure Stations
+      if (layersVisibility.droneCameras) {
+        activeDroneMission.cameraStations.forEach(cam => {
+          const camMarker = L.circleMarker(cam.coords, {
+            radius: 4.5,
+            color: '#0891b2',
+            fillColor: '#67e8f9',
+            fillOpacity: 0.95,
+            weight: 1.5
+          });
+          camMarker.bindPopup(`
+            <div style="font-family: sans-serif; font-size: 11px; max-width: 250px; padding: 2px;">
+              <div style="font-size: 9px; font-weight: 800; color: #0891b2; text-transform: uppercase;">📸 UAV Exposure #${cam.id}</div>
+              <div style="font-weight: 700; font-size: 12px; margin-top: 2px; color: #0f172a;">${cam.photoName}</div>
+              <div style="margin-top: 4px; font-size: 10px; color: #475569; line-height: 1.5;">
+                <strong>Altitude:</strong> ${cam.altitudeM}m AGL<br/>
+                <strong>GSD:</strong> ${cam.gsdCm} cm/px | <strong>Shutter:</strong> ${cam.shutterSpeed}<br/>
+                <strong>Orientation:</strong> Pitch ${cam.pitch}°, Roll ${cam.roll}°, Yaw ${cam.heading}°<br/>
+                <strong>RTK Fix:</strong> <span style="color: #166534; font-weight: 700;">● 3D ${cam.rtkFix}</span><br/>
+                <strong>Timestamp:</strong> ${cam.timestamp} IST
+              </div>
+            </div>
+          `);
+          markerLayersRef.current?.addLayer(camMarker);
+        });
+      }
+
+      // 5c. Ground Control Points (GCPs - Aerial Targets)
+      if (layersVisibility.droneGcps) {
+        activeDroneMission.gcps.forEach(gcp => {
+          const gcpMarker = L.circleMarker(gcp.coords, {
+            radius: 7,
+            color: '#ca8a04',
+            fillColor: '#fef08a',
+            fillOpacity: 1,
+            weight: 2
+          });
+          gcpMarker.bindPopup(`
+            <div style="font-family: sans-serif; font-size: 11px; max-width: 260px; padding: 2px;">
+              <div style="display: flex; align-items: center; justify-content: space-between;">
+                <span style="font-size: 9px; font-weight: 800; color: #ca8a04; text-transform: uppercase;">🎯 Aerial Target ${gcp.id}</span>
+                <span style="font-size: 9px; font-weight: 700; background: #fef9c3; color: #854d0e; padding: 1px 5px; border-radius: 4px;">DGPS Calibrated</span>
+              </div>
+              <div style="font-weight: 700; font-size: 12px; margin-top: 3px; color: #0f172a;">${gcp.name}</div>
+              <div style="margin-top: 4px; font-size: 10px; color: #475569; line-height: 1.5;">
+                <strong>Method:</strong> ${gcp.surveyMethod}<br/>
+                <strong>Elevation (MSL):</strong> ${gcp.elevationM} m<br/>
+                <strong>Bundle Adjustment Residual:</strong> <span style="color: #166534; font-weight: 700;">${(gcp.residualErrorM * 100).toFixed(1)} cm</span>
+              </div>
+            </div>
+          `);
+          markerLayersRef.current?.addLayer(gcpMarker);
+        });
+      }
+
+      // 5d. Drone Orthomosaic (ORI 5cm) Footprint
+      if (layersVisibility.droneOrtho) {
+        const orthoFootprint = L.rectangle(activeDroneMission.orthoBounds, {
+          color: '#10b981',
+          weight: 2,
+          dashArray: '5, 5',
+          fill: true,
+          fillColor: '#10b981',
+          fillOpacity: 0.08
+        });
+        orthoFootprint.bindTooltip(`
+          <strong>🛰️ 5cm Drone Orthomosaic Footprint (ORI)</strong><br/>
+          Mission: ${activeDroneMission.id}<br/>
+          Coverage: ${activeDroneMission.coverageAreaHa} Hectares | ${activeDroneMission.photoCount} Photos<br/>
+          SfM Bundle Adjustment RMS: ${(activeDroneMission.bundleAdjustmentRmsM * 100).toFixed(1)} cm
+        `);
+        markerLayersRef.current.addLayer(orthoFootprint);
+      }
+    }
 
     // 4. Render Conflict & Topology Markers
     if (layersVisibility.conflictMarkers && markerLayersRef.current) {
@@ -831,7 +971,7 @@ export const InteractiveMap: React.FC<InteractiveMapProps> = ({
         }
       });
     }
-  }, [parcels, selectedParcelId, highlightParcelId, colorMode, layersVisibility, conflicts, topologyIssues, onParcelSelect, setSelectedParcelId]);
+  }, [parcels, selectedParcelId, highlightParcelId, colorMode, layersVisibility, conflicts, topologyIssues, onParcelSelect, setSelectedParcelId, activeDroneMission]);
 
   // Center on conflict if passed
   useEffect(() => {
@@ -847,6 +987,51 @@ export const InteractiveMap: React.FC<InteractiveMapProps> = ({
       mapInstanceRef.current.flyToBounds(poly.getBounds(), { maxZoom: 19, duration: 0.8 });
     }
   }, [selectedParcelId]);
+
+  // Drone flight animation loop along active mission flight path
+  useEffect(() => {
+    const map = mapInstanceRef.current;
+    if (!map) return;
+
+    if (!isDroneFlying) {
+      if (droneMarkerRef.current) {
+        map.removeLayer(droneMarkerRef.current);
+        droneMarkerRef.current = null;
+      }
+      return;
+    }
+
+    const path = activeDroneMission.flightPath;
+    if (!droneMarkerRef.current && path.length > 0) {
+      const droneIcon = L.divIcon({
+        className: 'custom-drone-icon',
+        html: `
+          <div style="font-size: 26px; filter: drop-shadow(0 0 8px rgba(6,182,212,0.9)); transform: translate(-13px, -13px);">
+            🛸
+          </div>
+        `,
+        iconSize: [26, 26]
+      });
+      droneMarkerRef.current = L.marker(path[0], { icon: droneIcon, zIndexOffset: 2000 }).addTo(map);
+    }
+
+    const interval = setInterval(() => {
+      setDroneFlightIndex(prev => {
+        const nextIndex = (prev + 1) % path.length;
+        if (droneMarkerRef.current && path[nextIndex]) {
+          droneMarkerRef.current.setLatLng(path[nextIndex]);
+          if (nextIndex % 2 === 0) {
+            map.panTo(path[nextIndex], { animate: true, duration: 0.5 });
+          }
+        }
+        return nextIndex;
+      });
+    }, 750);
+
+    return () => {
+      clearInterval(interval);
+    };
+  }, [isDroneFlying, activeDroneMission]);
 
   // Quick navigation helpers
   const flyToProjectSector = () => {
@@ -1101,6 +1286,27 @@ export const InteractiveMap: React.FC<InteractiveMapProps> = ({
             <Sparkles className="w-3 h-3 text-amber-400 animate-pulse" />
             <span>Examples ({MAP_CASE_STUDIES.length})</span>
           </button>
+
+          <span className="text-slate-600">|</span>
+
+          {/* Drone Survey Mission Button */}
+          <button
+            type="button"
+            onClick={() => {
+              setIsDroneDrawerOpen(!isDroneDrawerOpen);
+              setIsExamplesDrawerOpen(false);
+              setIsLandmarkDropdownOpen(false);
+            }}
+            className={`flex items-center gap-1.5 px-2.5 py-0.5 rounded text-[11px] font-bold cursor-pointer transition-all ${
+              isDroneDrawerOpen
+                ? 'bg-cyan-500 text-slate-950 ring-1 ring-cyan-300'
+                : 'text-cyan-400 hover:bg-cyan-950/60'
+            }`}
+            title="Inspect 5cm UAV Drone Survey, flight trajectories, and photogrammetry stations"
+          >
+            <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-ping"></span>
+            <span>🛸 Drone Survey</span>
+          </button>
         </div>
       </div>
 
@@ -1201,6 +1407,226 @@ export const InteractiveMap: React.FC<InteractiveMapProps> = ({
         </div>
       )}
 
+      {/* Drone Survey Mission Drawer Modal */}
+      {isDroneDrawerOpen && (
+        <div className="absolute top-14 left-14 z-30 w-[420px] max-w-[calc(100%-80px)] max-h-[85%] bg-slate-900/95 backdrop-blur-xl border border-cyan-700/80 rounded-2xl shadow-2xl p-4 flex flex-col text-white animate-in fade-in zoom-in-95 duration-200">
+          <div className="flex items-center justify-between border-b border-slate-800 pb-2.5 mb-2.5">
+            <div className="flex items-center gap-2">
+              <span className="p-1.5 rounded-lg bg-cyan-500/20 text-cyan-400">
+                <Plane className="w-4 h-4" />
+              </span>
+              <div>
+                <h4 className="text-xs font-bold text-white flex items-center gap-1.5">
+                  UAV Photogrammetry Mission
+                  <span className="text-[9px] px-1.5 py-0.2 rounded-full bg-cyan-500/20 text-cyan-300 border border-cyan-500/40 font-mono font-bold">
+                    {activeDroneMission.gsdCm}cm GSD
+                  </span>
+                </h4>
+                <p className="text-[10px] text-slate-400">High-Resolution Drone Orthomosaic & PPK Flight Survey</p>
+              </div>
+            </div>
+            <button
+              type="button"
+              onClick={() => setIsDroneDrawerOpen(false)}
+              className="p-1 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition-colors"
+            >
+              <X className="w-4 h-4" />
+            </button>
+          </div>
+
+          {/* Mission Switcher */}
+          <div className="flex items-center gap-1.5 bg-slate-950/80 p-1 rounded-lg border border-slate-800 mb-3 text-[11px]">
+            {ALL_DRONE_MISSIONS.map(m => (
+              <button
+                key={m.id}
+                type="button"
+                onClick={() => {
+                  setActiveDroneMission(m);
+                  if (mapInstanceRef.current) {
+                    mapInstanceRef.current.flyTo(m.takeoffPoint, 18, { duration: 1.0 });
+                  }
+                }}
+                className={`flex-1 py-1 rounded-md font-semibold transition-all cursor-pointer truncate text-center ${
+                  activeDroneMission.id === m.id
+                    ? 'bg-cyan-600 text-white shadow-sm'
+                    : 'text-slate-400 hover:text-white hover:bg-slate-800/60'
+                }`}
+              >
+                {m.id === 'UAV-BLR-2026-03' ? 'Indiranagar (384 Photos)' : 'Ulsoor Lake (290 Photos)'}
+              </button>
+            ))}
+          </div>
+
+          {/* Mission Telemetry Summary Card */}
+          <div className="bg-slate-950/70 rounded-xl p-3 border border-slate-800/80 mb-3 space-y-2 text-[11px]">
+            <div className="flex items-center justify-between">
+              <span className="text-slate-400">Mission Code:</span>
+              <span className="font-mono text-cyan-400 font-bold">{activeDroneMission.id}</span>
+            </div>
+            <div className="flex items-center justify-between">
+              <span className="text-slate-400">Hardware Platform:</span>
+              <span className="text-slate-200 font-medium truncate max-w-[200px]" title={activeDroneMission.droneModel}>
+                {activeDroneMission.droneModel}
+              </span>
+            </div>
+            <div className="flex items-center justify-between">
+              <span className="text-slate-400">Sensor & Lens:</span>
+              <span className="text-slate-200 font-medium truncate max-w-[200px]" title={activeDroneMission.payloadCamera}>
+                {activeDroneMission.payloadCamera}
+              </span>
+            </div>
+            <div className="grid grid-cols-3 gap-2 pt-1 border-t border-slate-800/60 text-center">
+              <div className="bg-slate-900/60 p-1.5 rounded-lg border border-slate-800">
+                <div className="text-[10px] text-slate-400">Flight Alt</div>
+                <div className="font-mono font-bold text-white text-xs">{activeDroneMission.flightAltitudeM}m</div>
+              </div>
+              <div className="bg-slate-900/60 p-1.5 rounded-lg border border-slate-800">
+                <div className="text-[10px] text-slate-400">Overlap</div>
+                <div className="font-mono font-bold text-white text-xs">{activeDroneMission.forwardOverlap}/{activeDroneMission.sideOverlap}%</div>
+              </div>
+              <div className="bg-slate-900/60 p-1.5 rounded-lg border border-slate-800">
+                <div className="text-[10px] text-slate-400">SfM RMS</div>
+                <div className="font-mono font-bold text-emerald-400 text-xs">{(activeDroneMission.bundleAdjustmentRmsM * 100).toFixed(1)} cm</div>
+              </div>
+            </div>
+          </div>
+
+          {/* Layer Quick Toggles */}
+          <div className="space-y-1.5 mb-3 text-[11px]">
+            <div className="text-[10px] uppercase font-bold text-slate-400 tracking-wider">Drone GIS Sub-Layers</div>
+            <div className="grid grid-cols-2 gap-2">
+              <label className="flex items-center gap-1.5 p-1.5 rounded-lg bg-slate-950/50 border border-slate-800 cursor-pointer text-cyan-400">
+                <input
+                  type="checkbox"
+                  checked={layersVisibility.droneFlightPath}
+                  onChange={e => setLayersVisibility(prev => ({ ...prev, droneFlightPath: e.target.checked }))}
+                  className="rounded text-cyan-600 focus:ring-0"
+                />
+                <span>Flight Path Grid</span>
+              </label>
+
+              <label className="flex items-center gap-1.5 p-1.5 rounded-lg bg-slate-950/50 border border-slate-800 cursor-pointer text-sky-400">
+                <input
+                  type="checkbox"
+                  checked={layersVisibility.droneCameras}
+                  onChange={e => setLayersVisibility(prev => ({ ...prev, droneCameras: e.target.checked }))}
+                  className="rounded text-sky-600 focus:ring-0"
+                />
+                <span>Camera Stations ({activeDroneMission.cameraStations.length})</span>
+              </label>
+
+              <label className="flex items-center gap-1.5 p-1.5 rounded-lg bg-slate-950/50 border border-slate-800 cursor-pointer text-amber-400">
+                <input
+                  type="checkbox"
+                  checked={layersVisibility.droneGcps}
+                  onChange={e => setLayersVisibility(prev => ({ ...prev, droneGcps: e.target.checked }))}
+                  className="rounded text-amber-600 focus:ring-0"
+                />
+                <span>Aerial Targets GCP ({activeDroneMission.gcps.length})</span>
+              </label>
+
+              <label className="flex items-center gap-1.5 p-1.5 rounded-lg bg-slate-950/50 border border-slate-800 cursor-pointer text-emerald-400">
+                <input
+                  type="checkbox"
+                  checked={layersVisibility.droneOrtho}
+                  onChange={e => setLayersVisibility(prev => ({ ...prev, droneOrtho: e.target.checked }))}
+                  className="rounded text-emerald-600 focus:ring-0"
+                />
+                <span>5cm Orthomosaic</span>
+              </label>
+            </div>
+          </div>
+
+          {/* Interactive Simulation Controls */}
+          <div className="pt-2 border-t border-slate-800/80 flex items-center gap-2">
+            <button
+              type="button"
+              onClick={() => {
+                setIsDroneFlying(!isDroneFlying);
+                if (!isDroneFlying && mapInstanceRef.current) {
+                  mapInstanceRef.current.flyTo(activeDroneMission.takeoffPoint, 18, { duration: 0.8 });
+                }
+              }}
+              className={`flex-1 py-2 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-2 shadow-lg cursor-pointer ${
+                isDroneFlying
+                  ? 'bg-rose-600 hover:bg-rose-500 text-white animate-pulse'
+                  : 'bg-gradient-to-r from-cyan-600 to-sky-600 hover:from-cyan-500 hover:to-sky-500 text-white'
+              }`}
+            >
+              {isDroneFlying ? (
+                <>
+                  <Pause className="w-3.5 h-3.5" />
+                  <span>Pause UAV Flight Simulation</span>
+                </>
+              ) : (
+                <>
+                  <Play className="w-3.5 h-3.5" />
+                  <span>Fly UAV Flight Mission Live</span>
+                </>
+              )}
+            </button>
+
+            <button
+              type="button"
+              onClick={() => {
+                if (mapInstanceRef.current) {
+                  mapInstanceRef.current.fitBounds(activeDroneMission.orthoBounds, { padding: [40, 40] });
+                }
+              }}
+              className="p-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white border border-slate-700 transition-colors cursor-pointer"
+              title="Fit to Orthomosaic Extent"
+            >
+              <Target className="w-4 h-4" />
+            </button>
+          </div>
+        </div>
+      )}
+
+      {/* Live Drone Telemetry HUD Bar (Visible when simulation is flying) */}
+      {isDroneFlying && (
+        <div className="absolute top-16 left-1/2 -translate-x-1/2 z-20 bg-slate-900/90 backdrop-blur-md px-4 py-2 rounded-2xl border border-cyan-500/60 shadow-2xl flex items-center gap-4 text-xs text-white animate-in slide-in-from-top duration-300">
+          <div className="flex items-center gap-2 text-cyan-400 font-bold">
+            <span className="w-2.5 h-2.5 rounded-full bg-cyan-400 animate-ping"></span>
+            <span>UAV LIVE MISSION</span>
+          </div>
+
+          <div className="h-4 w-px bg-slate-700"></div>
+
+          <div className="flex items-center gap-3 font-mono text-[11px]">
+            <div>
+              <span className="text-slate-400 text-[9px] block">WAYPOINT</span>
+              <span className="text-cyan-300 font-bold">WP-{droneFlightIndex + 1}/{activeDroneMission.flightPath.length}</span>
+            </div>
+            <div>
+              <span className="text-slate-400 text-[9px] block">ALTITUDE</span>
+              <span className="text-emerald-400 font-bold">{activeDroneMission.flightAltitudeM}m AGL</span>
+            </div>
+            <div>
+              <span className="text-slate-400 text-[9px] block">SPEED</span>
+              <span className="text-sky-300 font-bold">11.8 m/s</span>
+            </div>
+            <div>
+              <span className="text-slate-400 text-[9px] block">RTK STATUS</span>
+              <span className="text-emerald-400 font-bold">3D FIXED</span>
+            </div>
+            <div>
+              <span className="text-slate-400 text-[9px] block">EXPOSURES</span>
+              <span className="text-amber-400 font-bold">📸 {340 + droneFlightIndex * 4}</span>
+            </div>
+          </div>
+
+          <div className="h-4 w-px bg-slate-700"></div>
+
+          <button
+            type="button"
+            onClick={() => setIsDroneFlying(false)}
+            className="px-2 py-1 rounded-lg bg-rose-600/80 hover:bg-rose-500 text-white text-[10px] font-bold cursor-pointer"
+          >
+            End Flight
+          </button>
+        </div>
+      )}
+
       {/* Top Right: Basemap Selector, Style & Fullscreen */}
       <div className="absolute top-3 right-3 z-10 flex flex-wrap items-center gap-2">
         {/* Real Basemap Selector */}
@@ -1265,7 +1691,7 @@ export const InteractiveMap: React.FC<InteractiveMapProps> = ({
 
       {/* Layer Toggles Panel (Bottom Left) */}
       {showLayerToggles && (
-        <div className="absolute bottom-8 left-3 z-10 bg-slate-900/95 backdrop-blur-md p-2.5 rounded-xl border border-slate-700/80 shadow-xl text-xs max-w-xs space-y-1.5 text-white">
+        <div className="absolute bottom-8 left-3 z-10 bg-slate-900/95 backdrop-blur-md p-2.5 rounded-xl border border-slate-700/80 shadow-xl text-xs max-w-xs space-y-2 text-white">
           <div className="flex items-center justify-between font-bold text-[10px] uppercase tracking-wider text-slate-400 border-b border-slate-800 pb-1">
             <span className="flex items-center gap-1.5 text-sky-400">
               <Layers className="w-3.5 h-3.5" />
@@ -1274,6 +1700,7 @@ export const InteractiveMap: React.FC<InteractiveMapProps> = ({
             <span className="text-[9px] text-emerald-400 font-mono">EPSG:32643</span>
           </div>
 
+          {/* Cadastral & Municipal Tiers */}
           <div className="grid grid-cols-2 gap-x-3 gap-y-1 text-[11px]">
             <label className="flex items-center gap-1.5 cursor-pointer text-emerald-400">
               <input
@@ -1324,6 +1751,64 @@ export const InteractiveMap: React.FC<InteractiveMapProps> = ({
               />
               <span>Disputes/Slivers</span>
             </label>
+          </div>
+
+          {/* UAV Photogrammetry Overlays */}
+          <div className="pt-1.5 border-t border-slate-800/80">
+            <div className="flex items-center justify-between text-[9px] font-bold text-cyan-400 uppercase tracking-wider mb-1">
+              <span className="flex items-center gap-1">
+                <Plane className="w-3 h-3 text-cyan-400" />
+                UAV Drone Survey (5cm)
+              </span>
+              <button
+                type="button"
+                onClick={() => setIsDroneDrawerOpen(true)}
+                className="text-[9px] text-cyan-300 hover:underline cursor-pointer"
+              >
+                Mission Drawer ↗
+              </button>
+            </div>
+            <div className="grid grid-cols-2 gap-x-3 gap-y-1 text-[11px]">
+              <label className="flex items-center gap-1.5 cursor-pointer text-cyan-300">
+                <input
+                  type="checkbox"
+                  checked={layersVisibility.droneFlightPath}
+                  onChange={e => setLayersVisibility(prev => ({ ...prev, droneFlightPath: e.target.checked }))}
+                  className="rounded text-cyan-600 focus:ring-0"
+                />
+                <span>UAV Flight Grid</span>
+              </label>
+
+              <label className="flex items-center gap-1.5 cursor-pointer text-cyan-400">
+                <input
+                  type="checkbox"
+                  checked={layersVisibility.droneCameras}
+                  onChange={e => setLayersVisibility(prev => ({ ...prev, droneCameras: e.target.checked }))}
+                  className="rounded text-cyan-600 focus:ring-0"
+                />
+                <span>Camera Stations</span>
+              </label>
+
+              <label className="flex items-center gap-1.5 cursor-pointer text-yellow-300">
+                <input
+                  type="checkbox"
+                  checked={layersVisibility.droneGcps}
+                  onChange={e => setLayersVisibility(prev => ({ ...prev, droneGcps: e.target.checked }))}
+                  className="rounded text-yellow-600 focus:ring-0"
+                />
+                <span>DGPS GCP Targets</span>
+              </label>
+
+              <label className="flex items-center gap-1.5 cursor-pointer text-emerald-400">
+                <input
+                  type="checkbox"
+                  checked={layersVisibility.droneOrtho}
+                  onChange={e => setLayersVisibility(prev => ({ ...prev, droneOrtho: e.target.checked }))}
+                  className="rounded text-emerald-600 focus:ring-0"
+                />
+                <span>5cm Orthomosaic</span>
+              </label>
+            </div>
           </div>
         </div>
       )}
