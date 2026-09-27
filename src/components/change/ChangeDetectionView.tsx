@@ -118,7 +118,7 @@ export const ChangeDetectionView: React.FC = () => {
                 Change #{selectedChange.id}
               </span>
               <h3 className="text-sm font-bold text-slate-900 dark:text-white capitalize">
-                {selectedChange.changeType.replace('_', ' ')}
+                {(selectedChange?.changeType || 'Structural Change').replace(/_/g, ' ')}
               </h3>
             </div>
             <StatusBadge status={selectedChange.status} />
@@ -230,7 +230,7 @@ export const ChangeDetectionView: React.FC = () => {
                 >
                   <td className="px-3 py-2 font-mono font-bold">{c.id}</td>
                   <td className="px-3 py-2 font-semibold text-slate-900 dark:text-white">{c.parcel_id}</td>
-                  <td className="px-3 py-2 capitalize">{c.changeType.replace('_', ' ')}</td>
+                  <td className="px-3 py-2 capitalize">{(c.changeType || 'change').replace(/_/g, ' ')}</td>
                   <td className="px-3 py-2 font-mono text-emerald-600 font-bold">+{c.areaDiffSqm} m²</td>
                   <td className="px-3 py-2 max-w-xs truncate">{c.description}</td>
                   <td className="px-3 py-2 font-mono">{c.confidence}%</td>

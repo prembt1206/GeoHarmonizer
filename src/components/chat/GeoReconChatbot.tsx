@@ -343,7 +343,7 @@ Ask me about:
                     <div className="flex items-center gap-1.5 mb-1 px-1 text-[10px] text-slate-400">
                       {msg.role === 'user' ? (
                         <>
-                          <span>You ({userRole.replace('_', ' ')})</span>
+                          <span>You ({(userRole || 'officer').replace(/_/g, ' ')})</span>
                           <User className="w-3 h-3 text-sky-400" />
                         </>
                       ) : (

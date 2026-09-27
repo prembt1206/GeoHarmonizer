@@ -196,13 +196,13 @@ export const ConflictCenterView: React.FC = () => {
                 <span>Conflict Location: #{activeConflict.id} (Parcel {activeConflict.parcel_id})</span>
               </h3>
               <span className="text-xs text-slate-500 font-mono">
-                Coordinates: {activeConflict.location[0].toFixed(5)}° N, {activeConflict.location[1].toFixed(5)}° E
+                Coordinates: {Number(activeConflict.location?.[0] ?? 12.3125).toFixed(5)}° N, {Number(activeConflict.location?.[1] ?? 76.6438).toFixed(5)}° E
               </span>
             </div>
 
             <InteractiveMap
               height="470px"
-              activeConflictLocation={activeConflict.location}
+              activeConflictLocation={Array.isArray(activeConflict.location) ? activeConflict.location : [12.3125, 76.6438]}
               highlightParcelId={activeConflict.parcel_id}
             />
           </div>
@@ -226,7 +226,7 @@ export const ConflictCenterView: React.FC = () => {
                 {activeConflict.title}
               </h4>
               <span className="text-[10px] text-slate-400 uppercase font-semibold">
-                Type: {(activeConflict.conflictType || 'boundary_discrepancy').replace('_', ' ')} • Severity: {activeConflict.severity}
+                Type: {(activeConflict.conflictType || 'boundary_discrepancy').replace(/_/g, ' ')} • Severity: {activeConflict.severity}
               </span>
             </div>
 
@@ -384,7 +384,7 @@ export const ConflictCenterView: React.FC = () => {
                     <td className="px-3 py-2 font-mono font-bold text-rose-600">{c.id}</td>
                     <td className="px-3 py-2 font-semibold text-slate-900 dark:text-white">{c.parcel_id}</td>
                     <td className="px-3 py-2 max-w-xs truncate">{c.title}</td>
-                    <td className="px-3 py-2 capitalize">{(c.conflictType || 'discrepancy').replace('_', ' ')}</td>
+                    <td className="px-3 py-2 capitalize">{(c.conflictType || 'discrepancy').replace(/_/g, ' ')}</td>
                     <td className="px-3 py-2"><StatusBadge status={c.severity} /></td>
                     <td className="px-3 py-2 font-mono">{c.confidence}%</td>
                     <td className="px-3 py-2"><StatusBadge status={c.status} /></td>

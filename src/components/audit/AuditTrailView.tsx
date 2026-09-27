@@ -97,7 +97,7 @@ export const AuditTrailView: React.FC = () => {
                   : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400'
               }`}
             >
-              {r.replace('_', ' ')}
+              {(r || '').replace(/_/g, ' ')}
             </button>
           ))}
         </div>

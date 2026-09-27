@@ -220,7 +220,7 @@ export const ParcelDetailDrawer: React.FC<ParcelDetailDrawerProps> = ({
                 >
                   <div>
                     <span className="font-mono text-sky-600 dark:text-sky-400 font-bold block capitalize">
-                      {item.field.replace('_', ' ')}
+                      {(item.field || 'Attribute').replace(/_/g, ' ')}
                     </span>
                     <span className="text-slate-700 dark:text-slate-300 mt-0.5 block">
                       Contributing Source: <strong>{item.source}</strong>

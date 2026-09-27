@@ -102,7 +102,7 @@ export const DataHub: React.FC = () => {
                   : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
               }`}
             >
-              {cat.replace('_', ' ')}
+              {(cat || '').replace(/_/g, ' ')}
             </button>
           ))}
         </div>

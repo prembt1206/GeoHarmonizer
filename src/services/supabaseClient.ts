@@ -47,7 +47,32 @@ export const supabaseDb = {
       console.warn('[Supabase] fetchParcels error:', error.message);
       return null;
     }
-    return data as unknown as HarmonizedParcel[];
+    return data.map((p: any) => ({
+      ...p,
+      area_sqm: Number(p.area_sqm || 0),
+      boundary_perimeter_m: Number(p.boundary_perimeter_m || 0),
+      building_count: Number(p.building_count || 0),
+      building_area_sqm: Number(p.building_area_sqm || 0),
+      confidence_score: Number(p.confidence_score || 90),
+      confidence_breakdown: p.confidence_breakdown || {
+        spatial_alignment: 95,
+        geometry_similarity: 95,
+        attribute_consistency: 95,
+        gnss_verification: 95,
+        source_quality: 95
+      },
+      utility_links: Array.isArray(p.utility_links) ? p.utility_links : [],
+      source_contributions: Array.isArray(p.source_contributions)
+        ? p.source_contributions.map((sc: any) => ({
+            field: sc.field || 'geometry',
+            source: sc.source || 'Cadastral',
+            confidence: Number(sc.confidence || 90),
+            rawValues: sc.rawValues || {}
+          }))
+        : [],
+      source_polygons: Array.isArray(p.source_polygons) ? p.source_polygons : [],
+      coordinates: Array.isArray(p.coordinates) ? p.coordinates : []
+    })) as HarmonizedParcel[];
   },
 
   async fetchDatasets(): Promise<Dataset[] | null> {
@@ -93,17 +118,16 @@ export const supabaseDb = {
       console.warn('[Supabase] fetchConflicts error:', error.message);
       return null;
     }
-    // Map snake_case DB columns to camelCase TS interface
     return data.map((c: any) => ({
       id: c.id,
       parcel_id: c.parcel_id,
-      title: c.title,
+      title: c.title || 'Boundary Discrepancy',
       conflictType: c.conflict_type ?? c.conflictType ?? 'boundary_discrepancy',
-      severity: c.severity,
+      severity: c.severity || 'moderate',
       sources: Array.isArray(c.sources) ? c.sources : [],
-      aiRecommendation: c.ai_recommendation ?? c.aiRecommendation ?? '',
+      aiRecommendation: c.ai_recommendation ?? c.aiRecommendation ?? 'Review cadastral and GNSS boundary lines',
       confidence: Number(c.confidence ?? 90),
-      status: c.status,
+      status: c.status || 'under_review',
       resolvedAction: c.resolved_action ?? c.resolvedAction,
       resolvedBy: c.resolved_by ?? c.resolvedBy,
       resolvedAt: c.resolved_at ?? c.resolvedAt,

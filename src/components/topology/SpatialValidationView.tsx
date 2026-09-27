@@ -126,7 +126,7 @@ export const SpatialValidationView: React.FC = () => {
                   Issue #{selectedIssue.id}
                 </span>
                 <h3 className="text-sm font-bold text-slate-900 dark:text-white capitalize">
-                  {selectedIssue.type.replace('_', ' ')}
+                  {(selectedIssue.type || 'Topology Anomaly').replace(/_/g, ' ')}
                 </h3>
               </div>
               <StatusBadge status={selectedIssue.status} />
@@ -136,7 +136,7 @@ export const SpatialValidationView: React.FC = () => {
               <div className="p-2.5 rounded-lg bg-slate-50 dark:bg-slate-850 border border-slate-200/80 dark:border-slate-800">
                 <span className="text-slate-400 block text-[10px] uppercase font-bold">Affected Parcels</span>
                 <div className="flex items-center gap-1.5 mt-0.5 font-mono font-bold text-slate-900 dark:text-white">
-                  {selectedIssue.affectedParcels.map(p => (
+                  {(selectedIssue.affectedParcels || []).map(p => (
                     <span key={p} className="px-2 py-0.5 rounded bg-sky-50 dark:bg-sky-950/50 text-sky-600 dark:text-sky-400 border border-sky-200 dark:border-sky-800">
                       {p}
                     </span>
