@@ -76,8 +76,8 @@ const BASEMAPS: Record<BasemapType, BasemapConfig> = {
     icon: '🧭',
     layers: [
       {
-        url: 'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png',
-        options: { maxZoom: 20, subdomains: 'abcd', attribution: '&copy; CARTO' }
+        url: 'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}.png',
+        options: { maxZoom: 20, maxNativeZoom: 19, subdomains: 'abcd', attribution: '&copy; CARTO' }
       }
     ]
   },
@@ -87,8 +87,13 @@ const BASEMAPS: Record<BasemapType, BasemapConfig> = {
     icon: '🌙',
     layers: [
       {
-        url: 'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png',
-        options: { maxZoom: 20, subdomains: 'abcd', attribution: '&copy; CARTO' }
+        url: 'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png',
+        options: {
+          maxZoom: 20,
+          maxNativeZoom: 19,
+          subdomains: 'abcd',
+          attribution: '&copy; <a href="https://carto.com/">CARTO</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+        }
       }
     ]
   },
@@ -98,8 +103,8 @@ const BASEMAPS: Record<BasemapType, BasemapConfig> = {
     icon: '☀️',
     layers: [
       {
-        url: 'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png',
-        options: { maxZoom: 20, subdomains: 'abcd', attribution: '&copy; CARTO' }
+        url: 'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png',
+        options: { maxZoom: 20, maxNativeZoom: 19, subdomains: 'abcd', attribution: '&copy; CARTO' }
       }
     ]
   }
@@ -163,7 +168,15 @@ export const InteractiveMap: React.FC<InteractiveMapProps> = ({
   // Function to switch basemap layers dynamically
   const applyBasemap = useCallback((map: L.Map, type: BasemapType) => {
     // Remove old tile layers
-    activeTileLayersRef.current.forEach(layer => map.removeLayer(layer));
+    activeTileLayersRef.current.forEach(layer => {
+      try {
+        if (map.hasLayer(layer)) {
+          map.removeLayer(layer);
+        }
+      } catch (err) {
+        console.warn('Error removing tile layer:', err);
+      }
+    });
     activeTileLayersRef.current = [];
 
     const config = BASEMAPS[type];
@@ -171,9 +184,17 @@ export const InteractiveMap: React.FC<InteractiveMapProps> = ({
 
     config.layers.forEach(item => {
       const tile = L.tileLayer(item.url, item.options).addTo(map);
+      tile.bringToBack();
       activeTileLayersRef.current.push(tile);
     });
   }, []);
+
+  const handleBasemapSelect = (type: BasemapType) => {
+    setActiveBasemap(type);
+    if (mapInstanceRef.current) {
+      applyBasemap(mapInstanceRef.current, type);
+    }
+  };
 
   // Initialize Map
   useEffect(() => {
@@ -552,16 +573,20 @@ export const InteractiveMap: React.FC<InteractiveMapProps> = ({
             return (
               <button
                 key={type}
-                onClick={() => setActiveBasemap(type)}
-                className={`flex items-center gap-1 px-2 py-1 rounded-md text-[11px] font-semibold transition-all ${
+                type="button"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handleBasemapSelect(type);
+                }}
+                className={`flex items-center gap-1 px-2.5 py-1 rounded-md text-[11px] font-semibold transition-all cursor-pointer ${
                   isActive
-                    ? 'bg-sky-600 text-white shadow-sm'
+                    ? 'bg-sky-600 text-white shadow-sm ring-1 ring-white/30'
                     : 'text-slate-300 hover:text-white hover:bg-slate-800'
                 }`}
                 title={`Switch to ${b.name}`}
               >
                 <span>{b.icon}</span>
-                <span className="hidden md:inline">{b.name}</span>
+                <span className="hidden sm:inline">{b.name}</span>
               </button>
             );
           })}

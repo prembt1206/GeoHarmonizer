@@ -47,7 +47,7 @@ const BEFORE_AFTER_BASEMAPS: Record<string, BeforeAfterBasemapConfig> = {
   dark: {
     name: 'GIS Dark',
     icon: '🌙',
-    url: 'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png'
+    url: 'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png'
   }
 };
 
@@ -69,18 +69,36 @@ export const BeforeAfterMap: React.FC = () => {
   const activeParcel = parcels.find(p => p.parcel_id === activeParcelId) || parcels[1];
 
   const applyBasemap = useCallback((map: L.Map, ref: React.MutableRefObject<L.TileLayer[]>, type: keyof typeof BEFORE_AFTER_BASEMAPS) => {
-    ref.current.forEach(layer => map.removeLayer(layer));
+    ref.current.forEach(layer => {
+      try {
+        if (map.hasLayer(layer)) map.removeLayer(layer);
+      } catch (err) {
+        console.warn('Error removing layer:', err);
+      }
+    });
     ref.current = [];
 
     const config = BEFORE_AFTER_BASEMAPS[type];
-    const base = L.tileLayer(config.url, { maxZoom: 20, attribution: '&copy; Esri / OSM' }).addTo(map);
+    const base = L.tileLayer(config.url, {
+      maxZoom: 20,
+      maxNativeZoom: 19,
+      subdomains: 'abcd',
+      attribution: '&copy; CARTO / Esri / OSM'
+    }).addTo(map);
+    base.bringToBack();
     ref.current.push(base);
 
     if (config.overlayUrl) {
-      const overlay = L.tileLayer(config.overlayUrl, { maxZoom: 20 }).addTo(map);
+      const overlay = L.tileLayer(config.overlayUrl, { maxZoom: 20, subdomains: 'abcd' }).addTo(map);
       ref.current.push(overlay);
     }
   }, []);
+
+  const handleBasemapChange = (type: keyof typeof BEFORE_AFTER_BASEMAPS) => {
+    setBasemapType(type);
+    if (beforeInstanceRef.current) applyBasemap(beforeInstanceRef.current, beforeTileLayersRef, type);
+    if (afterInstanceRef.current) applyBasemap(afterInstanceRef.current, afterTileLayersRef, type);
+  };
 
   // Initialize both Leaflet maps
   useEffect(() => {
@@ -256,10 +274,11 @@ export const BeforeAfterMap: React.FC = () => {
               {(Object.keys(BEFORE_AFTER_BASEMAPS) as Array<keyof typeof BEFORE_AFTER_BASEMAPS>).map(type => (
                 <button
                   key={type}
-                  onClick={() => setBasemapType(type)}
-                  className={`px-2 py-1 rounded-md text-[11px] font-semibold transition-all ${
+                  type="button"
+                  onClick={() => handleBasemapChange(type)}
+                  className={`px-2 py-1 rounded-md text-[11px] font-semibold transition-all cursor-pointer ${
                     basemapType === type
-                      ? 'bg-sky-600 text-white shadow-sm'
+                      ? 'bg-sky-600 text-white shadow-sm ring-1 ring-white/30'
                       : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
                   }`}
                 >
