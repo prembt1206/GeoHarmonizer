@@ -33,8 +33,10 @@ export const OverviewDashboard: React.FC = () => {
     pipelineSteps,
     setActivePage,
     setSelectedParcelId,
+    setSelectedConflictId,
     auditLogs
   } = useGeoRecon();
+
 
   const openConflicts = conflicts.filter(c => c.status !== 'resolved').length;
   const openTopology = topologyIssues.filter(t => t.status === 'open').length;
@@ -281,9 +283,14 @@ export const OverviewDashboard: React.FC = () => {
               {conflicts.slice(0, 3).map(c => (
                 <div
                   key={c.id}
-                  onClick={() => setActivePage('conflict-center')}
+                  onClick={() => {
+                    setSelectedConflictId(c.id);
+                    setSelectedParcelId(c.parcel_id);
+                    setActivePage('conflict-center');
+                  }}
                   className="p-2.5 rounded-lg border border-slate-200 dark:border-slate-800 hover:border-sky-400 cursor-pointer transition-all bg-slate-50/60 dark:bg-slate-850/40"
                 >
+
                   <div className="flex items-center justify-between font-semibold text-slate-900 dark:text-white">
                     <span>{c.id}</span>
                     <StatusBadge status={c.severity} />

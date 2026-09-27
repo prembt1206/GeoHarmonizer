@@ -93,8 +93,24 @@ export const supabaseDb = {
       console.warn('[Supabase] fetchConflicts error:', error.message);
       return null;
     }
-    return data as unknown as HarmonizationConflict[];
+    // Map snake_case DB columns to camelCase TS interface
+    return data.map((c: any) => ({
+      id: c.id,
+      parcel_id: c.parcel_id,
+      title: c.title,
+      conflictType: c.conflict_type ?? c.conflictType ?? 'boundary_discrepancy',
+      severity: c.severity,
+      sources: Array.isArray(c.sources) ? c.sources : [],
+      aiRecommendation: c.ai_recommendation ?? c.aiRecommendation ?? '',
+      confidence: Number(c.confidence ?? 90),
+      status: c.status,
+      resolvedAction: c.resolved_action ?? c.resolvedAction,
+      resolvedBy: c.resolved_by ?? c.resolvedBy,
+      resolvedAt: c.resolved_at ?? c.resolvedAt,
+      location: Array.isArray(c.location) ? c.location : [12.3125, 76.6438]
+    })) as HarmonizationConflict[];
   },
+
 
   async updateConflictStatus(conflictId: string, status: string, resolvedAction?: string, resolvedBy?: string) {
     if (!supabase) return null;

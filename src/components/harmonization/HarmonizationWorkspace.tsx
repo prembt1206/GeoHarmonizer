@@ -18,7 +18,21 @@ import {
 import { useGeoRecon } from '../../context/GeoReconContext';
 import { MetricCard } from '../common/StatusBadge';
 
+const STEP_PAGE_MAP: Record<string, string> = {
+  'step-ingest': 'data-hub',
+  'step-profile': 'data-hub',
+  'step-crs': 'settings',
+  'step-match': 'spatial-matching',
+  'step-attribute': 'attribute-mapping',
+  'step-topology': 'spatial-validation',
+  'step-changes': 'change-detection',
+  'step-conflicts': 'conflict-center',
+  'step-confidence': 'confidence-engine',
+  'step-publish': 'canonical-records'
+};
+
 export const HarmonizationWorkspace: React.FC = () => {
+
   const {
     isHarmonizing,
     pipelineProgress,
@@ -106,21 +120,25 @@ export const HarmonizationWorkspace: React.FC = () => {
         </div>
 
         {/* 10-Stage Pipeline Grid (Section 11 Architecture) */}
+
         <div className="grid grid-cols-2 md:grid-cols-5 gap-3 pt-2">
           {pipelineSteps.map((step, idx) => {
             const isCur = isHarmonizing && idx === currentStepIndex;
             const isDone = step.status === 'completed';
+            const targetPage = STEP_PAGE_MAP[step.id];
 
             return (
               <div
                 key={step.id}
-                className={`p-3 rounded-xl border flex flex-col justify-between transition-all ${
+                onClick={() => targetPage && setActivePage(targetPage as any)}
+                className={`p-3 rounded-xl border flex flex-col justify-between transition-all cursor-pointer hover:scale-[1.02] hover:shadow-md active:scale-98 ${
                   isCur
                     ? 'border-sky-500 bg-sky-50 dark:bg-sky-950/40 text-sky-950 dark:text-sky-200 shadow-sm animate-pulse'
                     : isDone
-                    ? 'border-emerald-200 dark:border-emerald-900/60 bg-emerald-50/40 dark:bg-emerald-950/20 text-slate-800 dark:text-slate-200'
-                    : 'border-slate-200 dark:border-slate-800 bg-slate-50/40 dark:bg-slate-850/40 text-slate-400'
+                    ? 'border-emerald-200 dark:border-emerald-900/60 bg-emerald-50/40 dark:bg-emerald-950/20 text-slate-800 dark:text-slate-200 hover:border-emerald-400'
+                    : 'border-slate-200 dark:border-slate-800 bg-slate-50/40 dark:bg-slate-850/40 text-slate-400 hover:border-sky-400'
                 }`}
+                title={`Click to inspect ${step.name}`}
               >
                 <div>
                   <div className="flex items-center justify-between">
@@ -145,14 +163,16 @@ export const HarmonizationWorkspace: React.FC = () => {
                   </p>
                 </div>
 
-                <div className="mt-3 pt-2 border-t border-slate-200/50 dark:border-slate-800/50 text-[10px] font-medium text-slate-500 dark:text-slate-400">
-                  {step.summary}
+                <div className="mt-3 pt-2 border-t border-slate-200/50 dark:border-slate-800/50 text-[10px] font-medium text-slate-500 dark:text-slate-400 flex items-center justify-between">
+                  <span className="truncate">{step.summary}</span>
+                  <ArrowRight className="w-3 h-3 shrink-0 ml-1 text-sky-500 opacity-60" />
                 </div>
               </div>
             );
           })}
         </div>
       </div>
+
 
       {/* Summary Box After Completion (Section 11 & 29 Requirements) */}
       {isComplete && (
@@ -173,6 +193,14 @@ export const HarmonizationWorkspace: React.FC = () => {
             </div>
 
             <div className="flex items-center gap-2">
+              <button
+                onClick={() => setActivePage('conflict-center')}
+                className="flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-bold bg-rose-600 hover:bg-rose-500 text-white shadow-sm transition-all"
+              >
+                <AlertTriangle className="w-3.5 h-3.5" />
+                <span>Conflict Center</span>
+              </button>
+
               <button
                 onClick={() => setActivePage('before-after')}
                 className="flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-bold bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 text-sky-600 dark:text-sky-400 shadow-xs hover:border-sky-400 transition-all"
@@ -209,10 +237,15 @@ export const HarmonizationWorkspace: React.FC = () => {
               <span className="text-[10px] text-slate-400 font-bold uppercase">Needs Review</span>
               <p className="text-lg font-bold text-amber-600 dark:text-amber-400 mt-0.5">2</p>
             </div>
-            <div className="p-2.5 rounded-xl bg-white/80 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800">
+            <div
+              onClick={() => setActivePage('conflict-center')}
+              className="p-2.5 rounded-xl bg-white/80 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 cursor-pointer hover:border-rose-400 hover:scale-105 transition-all"
+              title="Click to open Conflict Center"
+            >
               <span className="text-[10px] text-slate-400 font-bold uppercase">Unresolved</span>
               <p className="text-lg font-bold text-rose-600 dark:text-rose-400 mt-0.5">1</p>
             </div>
+
             <div className="p-2.5 rounded-xl bg-white/80 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800">
               <span className="text-[10px] text-slate-400 font-bold uppercase">Topo Healed</span>
               <p className="text-lg font-bold text-sky-600 dark:text-sky-400 mt-0.5">{topologyIssues.length}</p>
