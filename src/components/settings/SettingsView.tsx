@@ -132,7 +132,7 @@ export const SettingsView: React.FC = () => {
                 ))}
               </select>
               <span className="text-[10px] text-slate-400 mt-1 block">
-                Recommended for Mysuru / Karnataka: EPSG:32643 (UTM 43N metric grid)
+                Recommended for Bengaluru / Karnataka: EPSG:32643 (UTM 43N metric grid)
               </span>
             </div>
 

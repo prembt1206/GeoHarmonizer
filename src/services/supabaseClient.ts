@@ -131,7 +131,7 @@ export const supabaseDb = {
       resolvedAction: c.resolved_action ?? c.resolvedAction,
       resolvedBy: c.resolved_by ?? c.resolvedBy,
       resolvedAt: c.resolved_at ?? c.resolvedAt,
-      location: Array.isArray(c.location) ? c.location : [12.3125, 76.6438]
+      location: Array.isArray(c.location) ? c.location : [12.9719, 77.6412]
     })) as HarmonizationConflict[];
   },
 

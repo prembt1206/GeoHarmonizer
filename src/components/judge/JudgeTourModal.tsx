@@ -31,7 +31,7 @@ export const JudgeTourModal: React.FC = () => {
       title: 'Different Departments Maintain Conflicting Versions of the Same Land',
       icon: Database,
       content:
-        'In Indian cities like Mysuru, Survey Settlement & Land Records (SSLR) maintains historical Cadastral maps, the Municipal Corporation (MCC) keeps property tax registers, and Revenue holds Bhoomi khatas. They use conflicting projections, mismatched plot areas (e.g. 182.4 m² vs 184.1 m²), and overlapping boundaries.',
+        'In Indian cities like Bengaluru, Survey Settlement & Land Records (SSLR) maintains historical Cadastral maps, the Municipal Corporation (BBMP) keeps property tax registers, and Revenue holds Bhoomi khatas. They use conflicting projections, mismatched plot areas (e.g. 182.4 m² vs 184.1 m²), and overlapping boundaries.',
       targetActionText: 'Inspect Fragmented Sources in Data Hub',
       targetPage: 'data-hub' as const
     },

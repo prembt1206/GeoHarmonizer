@@ -24,24 +24,24 @@ export const DataExchangeView: React.FC = () => {
 
   const handleExportGeoJson = () => {
     const data = syncService.exportToGeoJson(parcels);
-    syncService.triggerDownload('GeoRecon_Mysuru_Canonical_Parcels.geojson', data, 'application/geo+json');
+    syncService.triggerDownload('GeoRecon_Bengaluru_Canonical_Parcels.geojson', data, 'application/geo+json');
   };
 
   const handleExportCsv = () => {
     const data = syncService.exportToCsv(parcels);
-    syncService.triggerDownload('GeoRecon_Mysuru_Canonical_Parcels.csv', data, 'text/csv');
+    syncService.triggerDownload('GeoRecon_Bengaluru_Canonical_Parcels.csv', data, 'text/csv');
   };
 
   const handleExportJson = () => {
     const data = JSON.stringify(parcels, null, 2);
-    syncService.triggerDownload('GeoRecon_Mysuru_Parcels_Master.json', data, 'application/json');
+    syncService.triggerDownload('GeoRecon_Bengaluru_Parcels_Master.json', data, 'application/json');
   };
 
   const handleDownloadValidationReport = () => {
     const report = `# GeoRecon AI - Harmonization & Topology Validation Report
-Project: Mysuru Urban Land Harmonization Demo (SIH26013)
+Project: Bengaluru Urban Land Harmonization Demo (SIH26013)
 Generated: ${new Date().toLocaleString()}
-Authority: Survey Settlement & Land Records (SSLR) & Mysuru City Corporation (MCC)
+Authority: Survey Settlement & Land Records (SSLR) & Bruhat Bengaluru Mahanagara Palike (BBMP)
 
 Summary:
 - Total Master Parcels: ${parcels.length}

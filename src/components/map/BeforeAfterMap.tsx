@@ -86,7 +86,7 @@ export const BeforeAfterMap: React.FC = () => {
   useEffect(() => {
     if (!beforeMapRef.current || !afterMapRef.current) return;
 
-    const center: [number, number] = [12.3125, 76.6438];
+    const center: [number, number] = [12.9719, 77.6412];
     const zoom = 18;
 
     // Before Map (Fragmented conflicting sources)

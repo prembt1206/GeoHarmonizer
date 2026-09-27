@@ -187,7 +187,7 @@ export const HarmonizationWorkspace: React.FC = () => {
                   Harmonization Complete & Canonical Layer Generated
                 </h2>
                 <p className="text-xs text-slate-600 dark:text-slate-300">
-                  All multi-source spatial inputs reconciled for Mysuru Urban Sector. Canonical spatial indices updated.
+                  All multi-source spatial inputs reconciled for Bengaluru Urban Sector. Canonical spatial indices updated.
                 </p>
               </div>
             </div>

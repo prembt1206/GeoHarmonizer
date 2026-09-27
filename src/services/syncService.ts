@@ -33,7 +33,7 @@ export const syncService = {
         generator: 'GeoRecon AI v2.4 (SIH26013 Prototype)',
         harmonizedAt: new Date().toISOString(),
         totalParcels: parcels.length,
-        authority: 'Mysuru Urban Land Harmonization Demo'
+        authority: 'Bengaluru Urban Land Harmonization Demo (BBMP & SSLR)'
       },
       features: parcels.map(p => ({
         type: 'Feature',

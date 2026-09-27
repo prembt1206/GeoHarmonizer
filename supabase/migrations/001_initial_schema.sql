@@ -63,7 +63,7 @@ CREATE TABLE datasets (
     validation_status TEXT NOT NULL DEFAULT 'valid' CHECK (validation_status IN ('valid', 'has_issues', 'unvalidated')),
     issues_count INTEGER NOT NULL DEFAULT 0,
     geometry_type TEXT NOT NULL DEFAULT 'Polygon',
-    bbox JSONB NOT NULL DEFAULT '[76.640, 12.308, 76.660, 12.325]'::jsonb,
+    bbox JSONB NOT NULL DEFAULT '[77.630, 12.965, 77.655, 12.985]'::jsonb,
     attributes JSONB NOT NULL DEFAULT '[]'::jsonb,
     description TEXT,
     source_trust_score NUMERIC(5,2) NOT NULL DEFAULT 90.0,
@@ -379,7 +379,7 @@ CREATE POLICY "auth_update_datasets" ON datasets FOR ALL TO authenticated USING 
 CREATE POLICY "auth_update_settings" ON system_settings FOR ALL TO authenticated USING (true) WITH CHECK (true);
 
 -- ==============================================================================
--- 7. SEED DATA: MYSURU URBAN LAND HARMONIZATION DEMO (SIH26013)
+-- 7. SEED DATA: BENGALURU URBAN LAND HARMONIZATION DEMO (SIH26013)
 -- ==============================================================================
 
 -- 7.1 Seed: system_settings
@@ -414,10 +414,10 @@ VALUES
     'has_issues',
     17,
     'Polygon',
-    '[76.640, 12.308, 76.660, 12.325]'::jsonb,
+    '[77.630, 12.965, 77.655, 12.985]'::jsonb,
     '[
         {"name": "parcel_id", "type": "string", "nullPercentage": 0, "uniqueValues": 5482, "sampleValues": ["P-0101", "P-0102"], "canonicalMapping": "parcel_id", "mappingConfidence": 99},
-        {"name": "survey_no", "type": "string", "nullPercentage": 0.1, "uniqueValues": 5310, "sampleValues": ["SY-142/1", "SY-142/2A"], "canonicalMapping": "survey_number", "mappingConfidence": 98},
+        {"name": "survey_no", "type": "string", "nullPercentage": 0.1, "uniqueValues": 5310, "sampleValues": ["SY-84/1", "SY-84/2A"], "canonicalMapping": "survey_number", "mappingConfidence": 98},
         {"name": "area", "type": "float", "nullPercentage": 0, "uniqueValues": 2400, "sampleValues": [195.8, 182.4], "canonicalMapping": "area_sqm", "mappingConfidence": 97},
         {"name": "land_use", "type": "string", "nullPercentage": 1.2, "uniqueValues": 5, "sampleValues": ["Residential", "Commercial"], "canonicalMapping": "land_use", "mappingConfidence": 94},
         {"name": "ward", "type": "string", "nullPercentage": 0, "uniqueValues": 65, "sampleValues": ["Ward 14"], "canonicalMapping": "ward_id", "mappingConfidence": 95}
@@ -429,7 +429,7 @@ VALUES
     'ds-municipal',
     'Municipal GIS Property Tax Layer',
     'municipal',
-    'Mysuru City Corporation (MCC)',
+    'Bruhat Bengaluru Mahanagara Palike (BBMP)',
     'GeoJSON',
     'EPSG:32643',
     'WGS 84 / UTM Zone 43N',
@@ -440,9 +440,9 @@ VALUES
     'has_issues',
     23,
     'Polygon',
-    '[76.640, 12.308, 76.660, 12.325]'::jsonb,
+    '[77.630, 12.965, 77.655, 12.985]'::jsonb,
     '[
-        {"name": "property_id", "type": "string", "nullPercentage": 0, "uniqueValues": 6120, "sampleValues": ["MUC-8841-A", "MUC-8842-B"], "canonicalMapping": "municipal_property_id", "mappingConfidence": 96},
+        {"name": "property_id", "type": "string", "nullPercentage": 0, "uniqueValues": 6120, "sampleValues": ["BBMP-8841-A", "BBMP-8842-B"], "canonicalMapping": "municipal_property_id", "mappingConfidence": 96},
         {"name": "plot_area", "type": "float", "nullPercentage": 0.4, "uniqueValues": 2850, "sampleValues": [195.2, 184.1], "canonicalMapping": "area_sqm", "mappingConfidence": 95},
         {"name": "usage_type", "type": "string", "nullPercentage": 0, "uniqueValues": 6, "sampleValues": ["A1-Res", "B2-Comm"], "canonicalMapping": "land_use", "mappingConfidence": 92},
         {"name": "ward_code", "type": "string", "nullPercentage": 0, "uniqueValues": 65, "sampleValues": ["W-14", "W-15"], "canonicalMapping": "ward_id", "mappingConfidence": 98}
@@ -465,11 +465,11 @@ VALUES
     'valid',
     4,
     'Point',
-    '[76.640, 12.308, 76.660, 12.325]'::jsonb,
+    '[77.630, 12.965, 77.655, 12.985]'::jsonb,
     '[
-        {"name": "khata_number", "type": "string", "nullPercentage": 0, "uniqueValues": 5200, "sampleValues": ["KHT-70112", "KHT-70115"], "canonicalMapping": "revenue_khata_no", "mappingConfidence": 99},
-        {"name": "survey_no", "type": "string", "nullPercentage": 0, "uniqueValues": 5120, "sampleValues": ["SY-142/1", "SY-142/2A"], "canonicalMapping": "survey_number", "mappingConfidence": 98},
-        {"name": "owner_ref", "type": "string", "nullPercentage": 0, "uniqueValues": 4900, "sampleValues": ["OWN-MY-001", "OWN-MY-002"], "canonicalMapping": "owner_reference", "mappingConfidence": 91}
+        {"name": "khata_number", "type": "string", "nullPercentage": 0, "uniqueValues": 5200, "sampleValues": ["KHT-BLR-70112", "KHT-BLR-70115"], "canonicalMapping": "revenue_khata_no", "mappingConfidence": 99},
+        {"name": "survey_no", "type": "string", "nullPercentage": 0, "uniqueValues": 5120, "sampleValues": ["SY-84/1", "SY-84/2A"], "canonicalMapping": "survey_number", "mappingConfidence": 98},
+        {"name": "owner_ref", "type": "string", "nullPercentage": 0, "uniqueValues": 4900, "sampleValues": ["OWN-BLR-001", "OWN-BLR-002"], "canonicalMapping": "owner_reference", "mappingConfidence": 91}
     ]'::jsonb,
     'Official Bhoomi land khata records, mutation logs, and tenure classifications.',
     94.0
@@ -489,7 +489,7 @@ VALUES
     'valid',
     0,
     'Raster Grid',
-    '[76.640, 12.308, 76.660, 12.325]'::jsonb,
+    '[77.630, 12.965, 77.655, 12.985]'::jsonb,
     '[{"name": "band_count", "type": "number", "nullPercentage": 0, "uniqueValues": 1, "sampleValues": [4]}]'::jsonb,
     'High-resolution 5cm GSD Ortho-mosaic drone imagery flown in Q1 2026.',
     96.0
@@ -509,7 +509,7 @@ VALUES
     'valid',
     0,
     'Raster Grid',
-    '[76.640, 12.308, 76.660, 12.325]'::jsonb,
+    '[77.630, 12.965, 77.655, 12.985]'::jsonb,
     '[{"name": "elevation_min_m", "type": "float", "nullPercentage": 0, "uniqueValues": 1, "sampleValues": [752.4]}]'::jsonb,
     'Digital Surface & Terrain Model from LiDAR/Photogrammetry for 3D elevation profiling.',
     95.0
@@ -529,7 +529,7 @@ VALUES
     'has_issues',
     11,
     'Polygon',
-    '[76.640, 12.308, 76.660, 12.325]'::jsonb,
+    '[77.630, 12.965, 77.655, 12.985]'::jsonb,
     '[{"name": "bldg_id", "type": "string", "nullPercentage": 0, "uniqueValues": 4210, "sampleValues": ["B-0091", "B-0094"]}]'::jsonb,
     'Digitized roof footprints and setback structures with height and construction year.',
     91.0
@@ -538,7 +538,7 @@ VALUES
     'ds-utilities',
     'Underground Utilities Network',
     'utilities',
-    'Mysuru Water & Sewerage Board (KUWSDB)',
+    'Bangalore Water Supply & Sewerage Board (BWSSB)',
     'GeoJSON',
     'EPSG:4326',
     'WGS 84',
@@ -549,8 +549,8 @@ VALUES
     'valid',
     2,
     'LineString',
-    '[76.640, 12.308, 76.660, 12.325]'::jsonb,
-    '[{"name": "utility_id", "type": "string", "nullPercentage": 0, "uniqueValues": 890, "sampleValues": ["Water-M14-01"]}]'::jsonb,
+    '[77.630, 12.965, 77.655, 12.985]'::jsonb,
+    '[{"name": "utility_id", "type": "string", "nullPercentage": 0, "uniqueValues": 890, "sampleValues": ["BWSSB-INDIRA-01"]}]'::jsonb,
     'Potable water pipelines, underground storm drains, and HT electric cable corridors.',
     89.0
 ),
@@ -569,8 +569,8 @@ VALUES
     'valid',
     0,
     'Point',
-    '[76.640, 12.308, 76.660, 12.325]'::jsonb,
-    '[{"name": "station_id", "type": "string", "nullPercentage": 0, "uniqueValues": 340, "sampleValues": ["GNSS-MY-101"]}]'::jsonb,
+    '[77.630, 12.965, 77.655, 12.985]'::jsonb,
+    '[{"name": "station_id", "type": "string", "nullPercentage": 0, "uniqueValues": 340, "sampleValues": ["GNSS-BLR-101"]}]'::jsonb,
     'Sub-centimeter RTK GNSS field reference points calibrated against Survey of India CORS.',
     99.0
 ),
@@ -589,8 +589,8 @@ VALUES
     'valid',
     3,
     'Point',
-    '[76.640, 12.308, 76.660, 12.325]'::jsonb,
-    '[{"name": "gt_id", "type": "string", "nullPercentage": 0, "uniqueValues": 520, "sampleValues": ["GT-MY-044"]}]'::jsonb,
+    '[77.630, 12.965, 77.655, 12.985]'::jsonb,
+    '[{"name": "gt_id", "type": "string", "nullPercentage": 0, "uniqueValues": 520, "sampleValues": ["GT-BLR-044"]}]'::jsonb,
     'Geotagged site photos, boundary stone verification markers, and field remarks.',
     96.0
 ),
@@ -609,7 +609,7 @@ VALUES
     'valid',
     1,
     'LineString',
-    '[76.640, 12.308, 76.660, 12.325]'::jsonb,
+    '[77.630, 12.965, 77.655, 12.985]'::jsonb,
     '[{"name": "photo_id", "type": "string", "nullPercentage": 0, "uniqueValues": 1420, "sampleValues": ["DJI_0442"]}]'::jsonb,
     'PPK-tagged drone flight paths, camera trigger coordinates, and shutter angle telemetry.',
     93.0
@@ -618,7 +618,7 @@ VALUES
     feature_count = EXCLUDED.feature_count,
     validation_status = EXCLUDED.validation_status;
 
--- 7.3 Seed: Canonical Harmonized Parcels (Mysuru Sector)
+-- 7.3 Seed: Canonical Harmonized Parcels (Bengaluru Sector)
 INSERT INTO harmonized_parcels (
     parcel_id, survey_number, municipal_property_id, revenue_khata_no, area_sqm, 
     boundary_perimeter_m, ward_id, zone_name, land_use, building_count, 
@@ -628,17 +628,17 @@ INSERT INTO harmonized_parcels (
 ) VALUES
 (
     'P-0101',
-    'SY-142/1',
-    'MUC-8841-A',
-    'KHT-70112',
+    'SY-84/1',
+    'BBMP-8841-A',
+    'KHT-BLR-70112',
     195.40,
     56.20,
-    'Ward 14 - Kuvempunagar',
-    'South Zone',
+    'Ward 112 - Domlur / Indiranagar',
+    'BBMP East Zone',
     'Residential',
     1,
     110.20,
-    ARRAY['Water-M14-01', 'Power-UG-11'],
+    ARRAY['BWSSB-INDIRA-01', 'BESCOM-UG-11'],
     TRUE,
     'Verified',
     'Unchanged',
@@ -646,30 +646,30 @@ INSERT INTO harmonized_parcels (
     98.40,
     '{"spatial_alignment": 99, "geometry_similarity": 98, "attribute_consistency": 99, "gnss_verification": 98, "source_quality": 97}'::jsonb,
     '[
-        {"field": "geometry", "source": "GNSS + Cadastral", "confidence": 99, "rawValues": {"survey": "SY-142/1"}},
+        {"field": "geometry", "source": "GNSS + Cadastral", "confidence": 99, "rawValues": {"survey": "SY-84/1"}},
         {"field": "area_sqm", "source": "GNSS Post-Processed", "confidence": 98, "rawValues": {"gnss": 195.4, "municipal": 195.2}}
     ]'::jsonb,
     '[
-        {"source": "Cadastral (SY-142/1)", "color": "#ef4444", "coordinates": [[12.31201, 76.64301], [12.31201, 76.64375], [12.31267, 76.64375], [12.31267, 76.64301], [12.31201, 76.64301]], "area": 195.8},
-        {"source": "Municipal GIS", "color": "#3b82f6", "coordinates": [[12.31199, 76.64301], [12.31199, 76.64375], [12.31265, 76.64375], [12.31265, 76.64301], [12.31199, 76.64301]], "area": 195.2}
+        {"source": "Cadastral (SY-84/1)", "color": "#ef4444", "coordinates": [[12.97191, 77.64121], [12.97191, 77.64195], [12.97257, 77.64195], [12.97257, 77.64121], [12.97191, 77.64121]], "area": 195.8},
+        {"source": "Municipal GIS", "color": "#3b82f6", "coordinates": [[12.97189, 77.64121], [12.97189, 77.64195], [12.97255, 77.64195], [12.97255, 77.64121], [12.97189, 77.64121]], "area": 195.2}
     ]'::jsonb,
-    '[[12.31200, 76.64300], [12.31200, 76.64375], [12.31266, 76.64375], [12.31266, 76.64300], [12.31200, 76.64300]]'::jsonb,
+    '[[12.97190, 77.64120], [12.97190, 77.64195], [12.97256, 77.64195], [12.97256, 77.64120], [12.97190, 77.64120]]'::jsonb,
     'Auto-Approved',
     NULL
 ),
 (
     'P-0102',
-    'SY-142/2A',
-    'MUC-8842-B',
-    'KHT-70115',
+    'SY-84/2A',
+    'BBMP-8842-B',
+    'KHT-BLR-70115',
     182.00,
     54.00,
-    'Ward 14 - Kuvempunagar',
-    'South Zone',
+    'Ward 112 - Domlur / Indiranagar',
+    'BBMP East Zone',
     'Residential',
     1,
     98.50,
-    ARRAY['Water-M14-02', 'Power-UG-12'],
+    ARRAY['BWSSB-INDIRA-02', 'BESCOM-UG-12'],
     TRUE,
     'Verified',
     'Boundary Shifted',
@@ -681,26 +681,26 @@ INSERT INTO harmonized_parcels (
         {"field": "area_sqm", "source": "GNSS Verification (182.0 m²)", "confidence": 98, "rawValues": {"cadastral": 182.4, "municipal": 184.1, "drone": 181.8}}
     ]'::jsonb,
     '[
-        {"source": "Cadastral (SY-142/2A)", "color": "#ef4444", "coordinates": [[12.31204, 76.64383], [12.31204, 76.64458], [12.31270, 76.64458], [12.31270, 76.64383], [12.31204, 76.64383]], "area": 182.4},
-        {"source": "Municipal GIS (MUC-8842)", "color": "#3b82f6", "coordinates": [[12.31197, 76.64388], [12.31197, 76.64463], [12.31263, 76.64463], [12.31263, 76.64388], [12.31197, 76.64388]], "area": 184.1}
+        {"source": "Cadastral (SY-84/2A)", "color": "#ef4444", "coordinates": [[12.97194, 77.64203], [12.97194, 77.64278], [12.97260, 77.64278], [12.97260, 77.64203], [12.97194, 77.64203]], "area": 182.4},
+        {"source": "Municipal GIS (BBMP-8842)", "color": "#3b82f6", "coordinates": [[12.97187, 77.64208], [12.97187, 77.64283], [12.97253, 77.64283], [12.97253, 77.64208], [12.97187, 77.64208]], "area": 184.1}
     ]'::jsonb,
-    '[[12.31200, 76.64385], [12.31200, 76.64460], [12.31266, 76.64460], [12.31266, 76.64385], [12.31200, 76.64385]]'::jsonb,
+    '[[12.97190, 77.64205], [12.97190, 77.64280], [12.97256, 77.64280], [12.97256, 77.64205], [12.97190, 77.64205]]'::jsonb,
     'Approved by Officer',
     'K. Ramesh (GIS Analyst)'
 ),
 (
     'P-0103',
-    'SY-142/2B',
-    'MUC-8843-C',
-    'KHT-70118',
+    'SY-84/2B',
+    'BBMP-8843-C',
+    'KHT-BLR-70118',
     188.50,
     55.40,
-    'Ward 14 - Kuvempunagar',
-    'South Zone',
+    'Ward 112 - Domlur / Indiranagar',
+    'BBMP East Zone',
     'Commercial',
     1,
     135.00,
-    ARRAY['Water-M14-03', 'Power-UG-13'],
+    ARRAY['BWSSB-INDIRA-03', 'BESCOM-UG-13'],
     TRUE,
     'Verified',
     'Unchanged',
@@ -708,24 +708,24 @@ INSERT INTO harmonized_parcels (
     91.20,
     '{"spatial_alignment": 89, "geometry_similarity": 92, "attribute_consistency": 90, "gnss_verification": 95, "source_quality": 90}'::jsonb,
     '[{"field": "geometry", "source": "Pending Snap to P-0104", "confidence": 89, "rawValues": {"overlap_area_sqm": 3.7}}]'::jsonb,
-    '[{"source": "Cadastral (SY-142/2B)", "color": "#ef4444", "coordinates": [[12.31200, 76.64475], [12.31200, 76.64550], [12.31266, 76.64550], [12.31266, 76.64475], [12.31200, 76.64475]], "area": 191.0}]'::jsonb,
-    '[[12.31200, 76.64470], [12.31200, 76.64545], [12.31266, 76.64545], [12.31266, 76.64470], [12.31200, 76.64470]]'::jsonb,
+    '[{"source": "Cadastral (SY-84/2B)", "color": "#ef4444", "coordinates": [[12.97190, 77.64295], [12.97190, 77.64370], [12.97256, 77.64370], [12.97256, 77.64295], [12.97190, 77.64295]], "area": 191.0}]'::jsonb,
+    '[[12.97190, 77.64290], [12.97190, 77.64365], [12.97256, 77.64365], [12.97256, 77.64290], [12.97190, 77.64290]]'::jsonb,
     'Under Review',
     NULL
 ),
 (
     'P-0104',
-    'SY-142/3',
-    'MUC-8844-D',
-    'KHT-70120',
+    'SY-84/3',
+    'BBMP-8844-D',
+    'KHT-BLR-70120',
     176.20,
     53.20,
-    'Ward 14 - Kuvempunagar',
-    'South Zone',
+    'Ward 112 - Domlur / Indiranagar',
+    'BBMP East Zone',
     'Residential',
     1,
     88.00,
-    ARRAY['Water-M14-04'],
+    ARRAY['BWSSB-INDIRA-04'],
     TRUE,
     'Verified',
     'Unchanged',
@@ -734,23 +734,23 @@ INSERT INTO harmonized_parcels (
     '{"spatial_alignment": 90, "geometry_similarity": 93, "attribute_consistency": 92, "gnss_verification": 94, "source_quality": 91}'::jsonb,
     '[]'::jsonb,
     '[]'::jsonb,
-    '[[12.31200, 76.64555], [12.31200, 76.64630], [12.31266, 76.64630], [12.31266, 76.64555], [12.31200, 76.64555]]'::jsonb,
+    '[[12.97190, 77.64375], [12.97190, 77.64450], [12.97256, 77.64450], [12.97256, 77.64375], [12.97190, 77.64375]]'::jsonb,
     'Under Review',
     NULL
 ),
 (
     'P-0105',
-    'SY-142/4',
-    'MUC-8845-E',
-    'KHT-70125',
+    'SY-84/4',
+    'BBMP-8845-E',
+    'KHT-BLR-70125',
     210.00,
     58.50,
-    'Ward 14 - Kuvempunagar',
-    'South Zone',
+    'Ward 112 - Domlur / Indiranagar',
+    'BBMP East Zone',
     'Mixed Use',
     1,
     162.00,
-    ARRAY['Water-M14-05', 'Power-UG-15'],
+    ARRAY['BWSSB-INDIRA-05', 'BESCOM-UG-15'],
     TRUE,
     'Pending Field Visit',
     'Boundary Shifted',
@@ -759,23 +759,23 @@ INSERT INTO harmonized_parcels (
     '{"spatial_alignment": 85, "geometry_similarity": 88, "attribute_consistency": 91, "gnss_verification": 92, "source_quality": 89}'::jsonb,
     '[{"field": "building_encroachment", "source": "Building Footprint B-0094", "confidence": 88, "rawValues": {"offset_m": 0.8}}]'::jsonb,
     '[]'::jsonb,
-    '[[12.31200, 76.64640], [12.31200, 76.64715], [12.31266, 76.64715], [12.31266, 76.64640], [12.31200, 76.64640]]'::jsonb,
+    '[[12.97190, 77.64460], [12.97190, 77.64535], [12.97256, 77.64535], [12.97256, 77.64460], [12.97190, 77.64460]]'::jsonb,
     'Under Review',
     NULL
 ),
 (
     'P-0106',
-    'SY-143/1',
-    'MUC-8846-F',
-    'KHT-70130',
+    'SY-85/1',
+    'BBMP-8846-F',
+    'KHT-BLR-70130',
     198.00,
     56.80,
-    'Ward 14 - Kuvempunagar',
-    'South Zone',
+    'Ward 112 - Domlur / Indiranagar',
+    'BBMP East Zone',
     'Residential',
     2,
     142.20,
-    ARRAY['Water-M14-06', 'Power-UG-16'],
+    ARRAY['BWSSB-INDIRA-06', 'BESCOM-UG-16'],
     TRUE,
     'Verified',
     'New Structure Detected',
@@ -784,23 +784,23 @@ INSERT INTO harmonized_parcels (
     '{"spatial_alignment": 95, "geometry_similarity": 94, "attribute_consistency": 92, "gnss_verification": 95, "source_quality": 93}'::jsonb,
     '[{"field": "change_detection", "source": "2025 vs 2026 Drone ORI", "confidence": 94, "rawValues": {"new_building_area_sqm": 46.2}}]'::jsonb,
     '[]'::jsonb,
-    '[[12.31275, 76.64300], [12.31275, 76.64375], [12.31341, 76.64375], [12.31341, 76.64300], [12.31275, 76.64300]]'::jsonb,
+    '[[12.97265, 77.64120], [12.97265, 77.64195], [12.97331, 77.64195], [12.97331, 77.64120], [12.97265, 77.64120]]'::jsonb,
     'Approved by Officer',
     'S. Nanjappa (Revenue Officer)'
 ),
 (
     'P-0107',
-    'SY-143/2',
-    'MUC-8847-G',
-    'KHT-70135',
+    'SY-85/2',
+    'BBMP-8847-G',
+    'KHT-BLR-70135',
     185.00,
     54.60,
-    'Ward 14 - Kuvempunagar',
-    'South Zone',
+    'Ward 112 - Domlur / Indiranagar',
+    'BBMP East Zone',
     'Residential',
     1,
     92.00,
-    ARRAY['Water-M14-07'],
+    ARRAY['BWSSB-INDIRA-07'],
     TRUE,
     'Verified',
     'Unchanged',
@@ -809,23 +809,23 @@ INSERT INTO harmonized_parcels (
     '{"spatial_alignment": 98, "geometry_similarity": 97, "attribute_consistency": 96, "gnss_verification": 98, "source_quality": 97}'::jsonb,
     '[]'::jsonb,
     '[]'::jsonb,
-    '[[12.31275, 76.64385], [12.31275, 76.64460], [12.31341, 76.64460], [12.31341, 76.64385], [12.31275, 76.64385]]'::jsonb,
+    '[[12.97265, 77.64205], [12.97265, 77.64280], [12.97331, 77.64280], [12.97331, 77.64205], [12.97265, 77.64205]]'::jsonb,
     'Auto-Approved',
     NULL
 ),
 (
     'P-0108',
-    'SY-143/3',
-    'MUC-8848-H',
-    'KHT-70140',
+    'SY-85/3',
+    'BBMP-8848-H',
+    'KHT-BLR-70140',
     172.50,
     52.80,
-    'Ward 14 - Kuvempunagar',
-    'South Zone',
+    'Ward 112 - Domlur / Indiranagar',
+    'BBMP East Zone',
     'Residential',
     1,
     85.00,
-    ARRAY['Water-M14-08'],
+    ARRAY['BWSSB-INDIRA-08'],
     TRUE,
     'Verified',
     'Unchanged',
@@ -834,23 +834,23 @@ INSERT INTO harmonized_parcels (
     '{"spatial_alignment": 88, "geometry_similarity": 91, "attribute_consistency": 90, "gnss_verification": 93, "source_quality": 86}'::jsonb,
     '[]'::jsonb,
     '[]'::jsonb,
-    '[[12.31275, 76.64470], [12.31275, 76.64545], [12.31341, 76.64545], [12.31341, 76.64470], [12.31275, 76.64470]]'::jsonb,
+    '[[12.97265, 77.64290], [12.97265, 77.64365], [12.97331, 77.64365], [12.97331, 77.64290], [12.97265, 77.64290]]'::jsonb,
     'Under Review',
     NULL
 ),
 (
     'P-0109',
-    'SY-143/4',
-    'MUC-8849-J',
-    'KHT-70148',
+    'SY-85/4',
+    'BBMP-8849-J',
+    'KHT-BLR-70148',
     230.00,
     61.20,
-    'Ward 14 - Kuvempunagar',
-    'South Zone',
+    'Ward 112 - Domlur / Indiranagar',
+    'BBMP East Zone',
     'Commercial',
     1,
     180.00,
-    ARRAY['Water-M14-09', 'Power-UG-19'],
+    ARRAY['BWSSB-INDIRA-09', 'BESCOM-UG-19'],
     FALSE,
     'Disputed',
     'Land Use Altered',
@@ -859,23 +859,23 @@ INSERT INTO harmonized_parcels (
     '{"spatial_alignment": 72, "geometry_similarity": 70, "attribute_consistency": 61, "gnss_verification": 60, "source_quality": 75}'::jsonb,
     '[{"field": "land_use", "source": "Disputed: Revenue (Res) vs Municipal (Comm)", "confidence": 61, "rawValues": {}}]'::jsonb,
     '[]'::jsonb,
-    '[[12.31275, 76.64555], [12.31275, 76.64630], [12.31341, 76.64630], [12.31341, 76.64555], [12.31275, 76.64555]]'::jsonb,
+    '[[12.97265, 77.64375], [12.97265, 77.64450], [12.97331, 77.64450], [12.97331, 77.64375], [12.97265, 77.64375]]'::jsonb,
     'Under Review',
     NULL
 ),
 (
     'P-0110',
-    'SY-143/5',
-    'MUC-8850-K',
-    'KHT-70152',
+    'SY-85/5',
+    'BBMP-8850-K',
+    'KHT-BLR-70152',
     204.00,
     57.80,
-    'Ward 14 - Kuvempunagar',
-    'South Zone',
+    'Ward 112 - Domlur / Indiranagar',
+    'BBMP East Zone',
     'Residential',
     1,
     105.00,
-    ARRAY['Water-M14-10', 'Power-UG-20'],
+    ARRAY['BWSSB-INDIRA-10', 'BESCOM-UG-20'],
     TRUE,
     'Verified',
     'Unchanged',
@@ -884,7 +884,7 @@ INSERT INTO harmonized_parcels (
     '{"spatial_alignment": 97, "geometry_similarity": 96, "attribute_consistency": 97, "gnss_verification": 97, "source_quality": 95}'::jsonb,
     '[]'::jsonb,
     '[]'::jsonb,
-    '[[12.31275, 76.64640], [12.31275, 76.64715], [12.31341, 76.64715], [12.31341, 76.64640], [12.31275, 76.64640]]'::jsonb,
+    '[[12.97265, 77.64460], [12.97265, 77.64535], [12.97331, 77.64535], [12.97331, 77.64460], [12.97265, 77.64460]]'::jsonb,
     'Auto-Approved',
     NULL
 ) ON CONFLICT (parcel_id) DO UPDATE SET
@@ -899,9 +899,9 @@ VALUES
 (
     'MATCH-001',
     'P-0101',
-    'MUC-8841-A',
+    'BBMP-8841-A',
     'B-0091',
-    'GNSS-MY-101',
+    'GNSS-BLR-101',
     98.40,
     'accepted',
     '{"overlap_iou": 98.2, "centroid_distance_m": 0.4, "shape_similarity": 98.5, "area_similarity": 99.1, "attribute_similarity": 97.4}'::jsonb,
@@ -910,9 +910,9 @@ VALUES
 (
     'MATCH-002',
     'P-0102',
-    'MUC-8842-B',
+    'BBMP-8842-B',
     'B-0092',
-    'GNSS-MY-102',
+    'GNSS-BLR-102',
     95.80,
     'accepted',
     '{"overlap_iou": 96.8, "centroid_distance_m": 1.2, "shape_similarity": 94.3, "area_similarity": 98.1, "attribute_similarity": 91.4}'::jsonb,
@@ -921,9 +921,9 @@ VALUES
 (
     'MATCH-003',
     'P-0103',
-    'MUC-8843-C',
+    'BBMP-8843-C',
     'B-0093',
-    'GNSS-MY-103',
+    'GNSS-BLR-103',
     91.20,
     'pending',
     '{"overlap_iou": 89.4, "centroid_distance_m": 1.9, "shape_similarity": 91.0, "area_similarity": 94.2, "attribute_similarity": 88.5}'::jsonb,
@@ -932,9 +932,9 @@ VALUES
 (
     'MATCH-005',
     'P-0105',
-    'MUC-8845-E',
+    'BBMP-8845-E',
     'B-0094',
-    'GNSS-MY-105',
+    'GNSS-BLR-105',
     87.50,
     'pending',
     '{"overlap_iou": 86.1, "centroid_distance_m": 2.1, "shape_similarity": 87.2, "area_similarity": 89.0, "attribute_similarity": 87.0}'::jsonb,
@@ -943,9 +943,9 @@ VALUES
 (
     'MATCH-009',
     'P-0109',
-    'MUC-8849-J',
+    'BBMP-8849-J',
     'B-0099',
-    'GNSS-MY-109',
+    'GNSS-BLR-109',
     68.40,
     'pending',
     '{"overlap_iou": 74.0, "centroid_distance_m": 3.8, "shape_similarity": 71.2, "area_similarity": 75.0, "attribute_similarity": 60.5}'::jsonb,
@@ -956,13 +956,13 @@ VALUES
 INSERT INTO attribute_mappings (id, source_dataset, source_field, canonical_field, confidence, sample_match, status)
 VALUES
 ('AM-01', 'Cadastral Layer', 'parcel_id', 'parcel_id', 99.0, 'P-0102 → parcel_id', 'approved'),
-('AM-02', 'Cadastral Layer', 'survey_no', 'survey_number', 98.0, 'SY-142/2A → survey_number', 'approved'),
+('AM-02', 'Cadastral Layer', 'survey_no', 'survey_number', 98.0, 'SY-84/2A → survey_number', 'approved'),
 ('AM-03', 'Cadastral Layer', 'area', 'area_sqm', 97.0, '182.4 → area_sqm', 'approved'),
 ('AM-04', 'Cadastral Layer', 'ward', 'ward_id', 96.0, 'Ward 14 → ward_id', 'approved'),
-('AM-05', 'Municipal GIS', 'property_id', 'municipal_property_id', 96.0, 'MUC-8842-B → municipal_property_id', 'approved'),
+('AM-05', 'Municipal GIS', 'property_id', 'municipal_property_id', 96.0, 'BBMP-8842-B → municipal_property_id', 'approved'),
 ('AM-06', 'Municipal GIS', 'plot_area', 'area_sqm', 95.0, '184.1 → area_sqm', 'approved'),
 ('AM-07', 'Municipal GIS', 'usage_type', 'land_use', 92.0, 'A1-Res → land_use', 'approved'),
-('AM-08', 'Revenue Register', 'khata_number', 'revenue_khata_no', 99.0, 'KHT-70115 → revenue_khata_no', 'approved'),
+('AM-08', 'Revenue Register', 'khata_number', 'revenue_khata_no', 99.0, 'KHT-BLR-70115 → revenue_khata_no', 'approved'),
 ('AM-09', 'Building Layer', 'footprint_area', 'building_area_sqm', 98.0, '98.5 → building_area_sqm', 'approved')
 ON CONFLICT (id) DO NOTHING;
 
@@ -975,9 +975,9 @@ VALUES
     'high',
     ARRAY['P-0103', 'P-0104'],
     3.70,
-    '[12.31200, 76.64542]'::jsonb,
+    '[12.97190, 77.64362]'::jsonb,
     'Cadastral boundary overlap of 3.7 m² between Parcel P-0103 and P-0104 along eastern survey line.',
-    'Snap boundary to mutual GNSS benchmark GNSS-MY-103 edge and partition overlap evenly.',
+    'Snap boundary to mutual GNSS benchmark GNSS-BLR-103 edge and partition overlap evenly.',
     97.20,
     'open'
 ),
@@ -987,7 +987,7 @@ VALUES
     'medium',
     ARRAY['P-0107', 'P-0108'],
     0.90,
-    '[12.31275, 76.64465]'::jsonb,
+    '[12.97265, 77.64285]'::jsonb,
     'Unassigned sliver gap of 0.9 m² between Parcel P-0107 and P-0108 due to municipal digitizing discrepancy.',
     'Eliminate sliver gap by snapping vertices to high-resolution drone orthophoto road curb line.',
     95.40,
@@ -999,7 +999,7 @@ VALUES
     'high',
     ARRAY['P-0105'],
     1.40,
-    '[12.31200, 76.64640]'::jsonb,
+    '[12.97190, 77.64460]'::jsonb,
     'Building footprint B-0094 extends 0.8m over cadastral parcel boundary into municipal road easement.',
     'Retain surveyed cadastral parcel boundary and flag building footprint as an unapproved setback encroachment.',
     94.00,
@@ -1011,7 +1011,7 @@ VALUES
     'low',
     ARRAY['P-0110'],
     0.00,
-    '[12.31275, 76.64640]'::jsonb,
+    '[12.97265, 77.64460]'::jsonb,
     'Two identical geometry records ingested from municipal legacy tax backup archive.',
     'Deduplicate by removing older record (Version 2023) and retaining verified 2026 record.',
     99.10,
@@ -1029,7 +1029,7 @@ VALUES
     2026,
     93.80,
     46.20,
-    '[12.31275, 76.64300]'::jsonb,
+    '[12.97265, 77.64120]'::jsonb,
     'New two-story residential building footprint detected via 2026 Drone ORI. Plot was recorded vacant in 2025.',
     'pending'
 ),
@@ -1041,7 +1041,7 @@ VALUES
     2026,
     91.50,
     0.00,
-    '[12.31275, 76.64555]'::jsonb,
+    '[12.97265, 77.64375]'::jsonb,
     'Residential dwelling converted into commercial retail arcade (signboard, parking alterations detected).',
     'pending'
 ) ON CONFLICT (id) DO NOTHING;
@@ -1056,8 +1056,8 @@ VALUES
     'boundary_discrepancy',
     'moderate',
     '[
-        {"source": "Cadastral Survey (SY-142/2A)", "value": "182.4 m²", "weight": 0.3},
-        {"source": "Municipal GIS (MUC-8842-B)", "value": "184.1 m²", "weight": 0.25},
+        {"source": "Cadastral Survey (SY-84/2A)", "value": "182.4 m²", "weight": 0.3},
+        {"source": "Municipal GIS (BBMP-8842-B)", "value": "184.1 m²", "weight": 0.25},
         {"source": "Drone-derived Ortho Boundary", "value": "181.8 m²", "weight": 0.2},
         {"source": "High-Precision GNSS Verification", "value": "182.0 m²", "weight": 0.25}
     ]'::jsonb,
@@ -1067,7 +1067,7 @@ VALUES
     'Accepted AI Recommendation (GNSS-verified 182.0 m²)',
     'K. Ramesh (GIS Analyst)',
     NOW(),
-    '[12.31200, 76.64385]'::jsonb
+    '[12.97190, 77.64205]'::jsonb
 ),
 (
     'CF-1043',
@@ -1080,13 +1080,13 @@ VALUES
         {"source": "Cadastral Survey P-0104", "value": "178.5 m²", "weight": 0.4},
         {"source": "Municipal Tax Map P-0103", "value": "188.5 m²", "weight": 0.2}
     ]'::jsonb,
-    'Snap mutual edge to GNSS coordinate benchmark GNSS-MY-103 and adjust P-0103 canonical area to 188.5 m².',
+    'Snap mutual edge to GNSS coordinate benchmark GNSS-BLR-103 and adjust P-0103 canonical area to 188.5 m².',
     93.10,
     'under_review',
     NULL,
     NULL,
     NULL,
-    '[12.31200, 76.64470]'::jsonb
+    '[12.97190, 77.64290]'::jsonb
 ),
 (
     'CF-1044',
@@ -1095,9 +1095,9 @@ VALUES
     'building_encroachment',
     'critical',
     '[
-        {"source": "Cadastral Parcel SY-142/4", "value": "Boundary strictly 210.0 m²", "weight": 0.4},
+        {"source": "Cadastral Parcel SY-84/4", "value": "Boundary strictly 210.0 m²", "weight": 0.4},
         {"source": "Building Layer B-0094", "value": "Roof overhang extends 0.8m beyond boundary", "weight": 0.35},
-        {"source": "Field Ground Truthing GT-MY-044", "value": "Confirmed physical balcony projection over street", "weight": 0.25}
+        {"source": "Field Ground Truthing GT-BLR-044", "value": "Confirmed physical balcony projection over street", "weight": 0.25}
     ]'::jsonb,
     'Preserve canonical parcel boundary as 210.0 m²; generate encroachment notice tag on Building B-0094 for municipal review.',
     94.50,
@@ -1105,7 +1105,7 @@ VALUES
     NULL,
     NULL,
     NULL,
-    '[12.31200, 76.64640]'::jsonb
+    '[12.97190, 77.64460]'::jsonb
 ),
 (
     'CF-1045',
@@ -1124,7 +1124,7 @@ VALUES
     NULL,
     NULL,
     NULL,
-    '[12.31275, 76.64555]'::jsonb
+    '[12.97265, 77.64375]'::jsonb
 ) ON CONFLICT (id) DO NOTHING;
 
 -- 7.9 Seed: Statutory Audit Log
@@ -1132,9 +1132,9 @@ INSERT INTO audit_logs (id, timestamp, user_role, user_name, action, target_obje
 VALUES
 ('AUD-001', '2026-09-27 10:42:15+05:30', 'gis_analyst', 'K. Ramesh', 'Dataset Ingestion & Registration', 'Cadastral Survey Map 2024 (5,482 features)', NULL, 'Registered in Data Hub', 'Success', 'Parsed GeoJSON, EPSG:4326 registered, 17 topology warnings flagged'),
 ('AUD-002', '2026-09-27 10:43:40+05:30', 'gis_analyst', 'K. Ramesh', 'CRS Transformation & Georeferencing', 'All Source Layers → Target EPSG:32643 (UTM 43N)', 'EPSG:4326', 'EPSG:32643', 'Success', 'Mean residual error 0.38m; maximum residual error 1.05m'),
-('AUD-003', '2026-09-27 10:44:18+05:30', 'admin', 'System (AI Harmonizer)', 'Spatial Matching Batch Run', '25 Urban Parcels in Mysuru Sector', 'Unmatched', '22 High Confidence Matches', 'Success', '22 matches high confidence (>90%), 2 medium, 1 low confidence'),
+('AUD-003', '2026-09-27 10:44:18+05:30', 'admin', 'System (AI Harmonizer)', 'Spatial Matching Batch Run', '25 Urban Parcels in Bengaluru Sector', 'Unmatched', '22 High Confidence Matches', 'Success', '22 matches high confidence (>90%), 2 medium, 1 low confidence'),
 ('AUD-004', '2026-09-27 10:45:12+05:30', 'admin', 'System (AI Harmonizer)', 'Auto-Approval of High Confidence Parcel', 'Parcel P-0101 (Confidence: 98.4%)', 'Unprocessed sources', 'Harmonized Canonical Record P-0101 (195.4 m²)', 'Success', 'Auto-locked to canonical table'),
-('AUD-005', '2026-09-27 10:48:30+05:30', 'gis_analyst', 'K. Ramesh', 'Conflict Resolution Override', 'Conflict #CF-1042 on Parcel P-0102', 'Cadastral: 182.4 m² vs Municipal: 184.1 m²', 'Adopted GNSS-verified edge (182.0 m²)', 'Manual Override', 'Officer verified against CORS station benchmark GNSS-MY-102')
+('AUD-005', '2026-09-27 10:48:30+05:30', 'gis_analyst', 'K. Ramesh', 'Conflict Resolution Override', 'Conflict #CF-1042 on Parcel P-0102', 'Cadastral: 182.4 m² vs Municipal: 184.1 m²', 'Adopted GNSS-verified edge (182.0 m²)', 'Manual Override', 'Officer verified against CORS station benchmark GNSS-BLR-102')
 ON CONFLICT (id) DO NOTHING;
 
 -- Verification Query to test table initialization

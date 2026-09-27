@@ -76,18 +76,18 @@ export const crsService = {
   transformCoordinates(lat: number, lng: number, sourceCrs: string, targetCrs: string): [number, number] {
     if (sourceCrs === targetCrs) return [lat, lng];
 
-    // For Karnataka / Mysuru (approx Lat 12.31, Lng 76.64)
+    // For Karnataka / Bengaluru (approx Lat 12.9719, Lng 77.6412 - Indiranagar / Domlur)
     // Conversion between WGS84 (Lat, Lng) and UTM 43N (Easting, Northing)
     if (sourceCrs === 'EPSG:4326' && targetCrs === 'EPSG:32643') {
-      // Approximate UTM 43N Easting & Northing calculation for Mysuru sector
-      const easting = 678400 + (lng - 76.643) * 108000;
-      const northing = 1361200 + (lat - 12.312) * 110500;
+      // Approximate UTM 43N Easting & Northing calculation for Bengaluru sector
+      const easting = 786600 + (lng - 77.6412) * 108500;
+      const northing = 1434800 + (lat - 12.9719) * 110600;
       return [northing, easting];
     }
 
     if (sourceCrs === 'EPSG:32643' && targetCrs === 'EPSG:4326') {
-      const lng = 76.643 + (lat - 678400) / 108000;
-      const latWgs = 12.312 + (lng - 1361200) / 110500;
+      const lng = 77.6412 + (lat - 786600) / 108500;
+      const latWgs = 12.9719 + (lng - 1434800) / 110600;
       return [latWgs, lng];
     }
 

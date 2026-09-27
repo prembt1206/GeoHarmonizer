@@ -171,7 +171,7 @@ export const Sidebar: React.FC = () => {
         </div>
         <div className="flex items-center justify-between">
           <span className="text-slate-400">Authority</span>
-          <span className="truncate max-w-[120px]" title="Mysuru City Corporation & SSLR">MCC & SSLR</span>
+          <span className="truncate max-w-[120px]" title="Bruhat Bengaluru Mahanagara Palike & SSLR">BBMP & SSLR</span>
         </div>
       </div>
     </aside>

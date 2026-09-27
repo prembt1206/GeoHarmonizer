@@ -196,13 +196,13 @@ export const ConflictCenterView: React.FC = () => {
                 <span>Conflict Location: #{activeConflict.id} (Parcel {activeConflict.parcel_id})</span>
               </h3>
               <span className="text-xs text-slate-500 font-mono">
-                Coordinates: {Number(activeConflict.location?.[0] ?? 12.3125).toFixed(5)}° N, {Number(activeConflict.location?.[1] ?? 76.6438).toFixed(5)}° E
+                Coordinates: {Number(activeConflict.location?.[0] ?? 12.9719).toFixed(5)}° N, {Number(activeConflict.location?.[1] ?? 77.6412).toFixed(5)}° E
               </span>
             </div>
 
             <InteractiveMap
               height="470px"
-              activeConflictLocation={Array.isArray(activeConflict.location) ? activeConflict.location : [12.3125, 76.6438]}
+              activeConflictLocation={Array.isArray(activeConflict.location) ? activeConflict.location : [12.9719, 77.6412]}
               highlightParcelId={activeConflict.parcel_id}
             />
           </div>

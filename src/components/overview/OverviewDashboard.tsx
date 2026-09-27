@@ -51,7 +51,7 @@ export const OverviewDashboard: React.FC = () => {
             <span className="px-2.5 py-0.5 rounded-full text-xs font-bold uppercase tracking-wider bg-sky-500/20 text-sky-400 border border-sky-500/30">
               Operational Command Center
             </span>
-            <span className="text-xs text-slate-400">Mysuru Urban Sector</span>
+            <span className="text-xs text-slate-400">Bengaluru Urban Sector (Indiranagar)</span>
           </div>
           <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-white mt-1">
             Urban Land Harmonization Command Center

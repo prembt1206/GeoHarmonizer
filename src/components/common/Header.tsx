@@ -72,7 +72,7 @@ export const Header: React.FC = () => {
           <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-slate-800/90 border border-slate-700/80 text-xs text-slate-300">
             <MapPin className="w-3.5 h-3.5 text-sky-400" />
             <span className="font-medium text-white">Project:</span>
-            <span>Mysuru Urban Land Harmonization Demo</span>
+            <span>Bengaluru Urban Land Harmonization Demo</span>
           </div>
 
           <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-slate-800/70 border border-slate-700 text-xs">
@@ -83,7 +83,7 @@ export const Header: React.FC = () => {
           </div>
 
           <div
-            title="Demonstration Mode: Uses synthetic realistic Mysuru datasets without calling paid external government APIs"
+            title="Demonstration Mode: Uses synthetic realistic Bengaluru datasets without calling paid external government APIs"
             className="flex items-center gap-1 px-2 py-0.5 rounded bg-sky-950/80 border border-sky-800/80 text-[11px] text-sky-300 cursor-help"
           >
             <Info className="w-3 h-3 text-sky-400" />

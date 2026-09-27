@@ -24,7 +24,7 @@ import {
   INITIAL_CHANGES,
   INITIAL_CONFLICTS,
   INITIAL_AUDIT_LOGS
-} from '../data/mysuruDemoData';
+} from '../data/bengaluruDemoData';
 import { topologyService } from '../services/topologyService';
 import { conflictResolutionService } from '../services/conflictResolutionService';
 import { supabaseDb, isSupabaseConfigured } from '../services/supabaseClient';
@@ -59,7 +59,7 @@ export const PIPELINE_STEPS: HarmonizationPipelineStep[] = [
   { id: 'step-changes', name: 'Change Detection', description: 'Compare 2025 baseline vs 2026 drone imagery for physical shifts', status: 'completed', durationMs: 550, itemsProcessed: 3, summary: '3 temporal alterations detected (1 new building)' },
   { id: 'step-conflicts', name: 'Conflict Resolution', description: 'Evidence weighting against GNSS benchmarks and ground truth', status: 'completed', durationMs: 440, itemsProcessed: 4, summary: '1 auto-resolved, 2 under review, 1 open' },
   { id: 'step-confidence', name: 'Confidence Scoring', description: 'Compute 5-factor transparent explainable confidence index', status: 'completed', durationMs: 290, itemsProcessed: 25, summary: 'Average project confidence: 94.6%' },
-  { id: 'step-publish', name: 'Publish & Sync', description: 'Generate validated canonical records and sync downstream GIS indices', status: 'completed', durationMs: 330, itemsProcessed: 25, summary: 'Canonical spatial index refreshed for Mysuru Sector' }
+  { id: 'step-publish', name: 'Publish & Sync', description: 'Generate validated canonical records and sync downstream GIS indices', status: 'completed', durationMs: 330, itemsProcessed: 25, summary: 'Canonical spatial index refreshed for Bengaluru Sector (Indiranagar)' }
 ];
 
 interface GeoReconContextType {
@@ -332,7 +332,7 @@ export const GeoReconProvider: React.FC<{ children: ReactNode }> = ({ children }
     setPipelineProgress(100);
     setCurrentStepIndex(PIPELINE_STEPS.length - 1);
     setPipelineSteps(PIPELINE_STEPS);
-    addAuditEntry('Demo Dataset Reset', 'Mysuru Urban Demo', 'Reset all records and test cases to initial seed state');
+    addAuditEntry('Demo Dataset Reset', 'Bengaluru Urban Demo (Indiranagar)', 'Reset all records and test cases to initial seed state');
   };
 
   const runFullHarmonization = async (): Promise<void> => {
@@ -370,7 +370,7 @@ export const GeoReconProvider: React.FC<{ children: ReactNode }> = ({ children }
       // non-critical
     }
 
-    addAuditEntry('Full AI Harmonization Pipeline Executed', 'Mysuru Urban Sector (25 Parcels)', '10/10 stages completed with high confidence');
+    addAuditEntry('Full AI Harmonization Pipeline Executed', 'Bengaluru Urban Sector (25 Parcels)', '10/10 stages completed with high confidence');
   };
 
   return (

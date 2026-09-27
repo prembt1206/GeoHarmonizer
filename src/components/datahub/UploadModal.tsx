@@ -22,8 +22,8 @@ interface UploadModalProps {
 }
 
 const SAMPLE_DEMO_PRESETS = [
-  { name: 'Mysuru_Cadastral_2026.geojson', category: 'cadastral' as DatasetCategory, department: 'Survey Settlement & Land Records (SSLR)', format: 'GeoJSON', size: 14200000 },
-  { name: 'MCC_PropertyTax_Master.geojson', category: 'municipal' as DatasetCategory, department: 'Mysuru City Corporation', format: 'GeoJSON', size: 18400000 },
+  { name: 'Bengaluru_Cadastral_2026.geojson', category: 'cadastral' as DatasetCategory, department: 'Survey Settlement & Land Records (SSLR)', format: 'GeoJSON', size: 14200000 },
+  { name: 'BBMP_PropertyTax_Master.geojson', category: 'municipal' as DatasetCategory, department: 'Bruhat Bengaluru Mahanagara Palike (BBMP)', format: 'GeoJSON', size: 18400000 },
   { name: 'Revenue_Bhoomi_Khatas.csv', category: 'revenue' as DatasetCategory, department: 'Bhoomi Revenue Register', format: 'CSV', size: 8200000 },
   { name: 'UAV_Orthomosaic_5cm.tif', category: 'ori' as DatasetCategory, department: 'Karnataka Drone Mission', format: 'GeoTIFF', size: 240000000 }
 ];

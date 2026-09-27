@@ -48,7 +48,7 @@ You assist GIS analysts, municipal officers, revenue officers, and SIH hackathon
    - Hausdorff Boundary Distance for shape similarity.
    - PostGIS ST_SnapToGrid, ST_Difference, ST_Intersection for topology healing.
 3. **Indian Land Records Systems**: Bhoomi (Karnataka Revenue), SSLR (Survey, Settlement and Land Records), RTC (Pahani / Record of Rights), Khata Numbers, Municipal Property Tax IDs, CORS (Continuously Operating Reference Stations).
-4. **Current Testbed**: Mysuru Urban Land Sector (EPSG:32643 UTM Zone 43N).
+4. **Current Testbed**: Bengaluru Urban Land Sector (Indiranagar / Domlur, EPSG:32643 UTM Zone 43N).
 
 ### Interactive Action Links:
 Whenever your answer recommends viewing a specific view or parcel, you can include interactive action tags in your text:
@@ -207,7 +207,7 @@ export const geminiChatService = {
     if (q.includes('conflict') || q.includes('p-0102') || q.includes('dispute')) {
       return {
         text: `### Analysis of Boundary Conflicts & Parcel P-0102
-In our **Mysuru Urban Land Sector**, Parcel **P-0102 (Survey No. 142/2A)** has an active boundary discrepancy:
+In our **Bengaluru Urban Land Sector (Indiranagar)**, Parcel **P-0102 (Survey No. 84/2A)** has an active boundary discrepancy:
 - **Discrepancy**: Municipal MCC tax boundaries show a **2.40m road setback encroaching** into the adjacent revenue survey polygon (142/2B).
 - **Evidence Weighting**:
   - Drone Orthophoto (0.05m GSD): High confidence boundary detected along physical compound wall.

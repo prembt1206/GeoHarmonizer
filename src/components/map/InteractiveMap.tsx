@@ -179,9 +179,9 @@ export const InteractiveMap: React.FC<InteractiveMapProps> = ({
   useEffect(() => {
     if (!mapContainerRef.current || mapInstanceRef.current) return;
 
-    // Center on Mysuru Urban Sector (Kuvempunagar / Vijayanagar)
+    // Center on Bengaluru Urban Sector (Indiranagar / Domlur)
     const map = L.map(mapContainerRef.current, {
-      center: [12.3135, 76.6450],
+      center: [12.9719, 77.6412],
       zoom: 17,
       zoomControl: false, // Custom position
       attributionControl: true
@@ -202,7 +202,7 @@ export const InteractiveMap: React.FC<InteractiveMapProps> = ({
     // Track mouse coordinates & zoom
     map.on('mousemove', (e: L.LeafletMouseEvent) => {
       const { lat, lng } = e.latlng;
-      // Approximation for UTM Zone 43N metric coordinates around Mysuru (central meridian 75°E)
+      // Approximation for UTM Zone 43N metric coordinates around Bengaluru (central meridian 75°E)
       const utmX = Math.round(500000 + (lng - 75.0) * 111320 * Math.cos((lat * Math.PI) / 180));
       const utmY = Math.round(lat * 110574);
       setCursorCoords({ lat, lng, utmX, utmY });
@@ -419,7 +419,7 @@ export const InteractiveMap: React.FC<InteractiveMapProps> = ({
     if (bounds && mapInstanceRef.current) {
       mapInstanceRef.current.fitBounds(bounds, { padding: [50, 50], maxZoom: 18 });
     } else {
-      mapInstanceRef.current?.flyTo([12.3135, 76.6450], 17, { duration: 1.0 });
+      mapInstanceRef.current?.flyTo([12.9719, 77.6412], 17, { duration: 1.0 });
     }
   };
 
@@ -451,9 +451,9 @@ export const InteractiveMap: React.FC<InteractiveMapProps> = ({
     try {
       const res = await fetch(
         `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(
-          searchQuery.includes('India') || searchQuery.includes('Mysuru') || searchQuery.includes('Karnataka')
+          searchQuery.includes('India') || searchQuery.includes('Bengaluru') || searchQuery.includes('Bangalore') || searchQuery.includes('Karnataka')
             ? searchQuery
-            : `${searchQuery}, Mysuru, Karnataka, India`
+            : `${searchQuery}, Bengaluru, Karnataka, India`
         )}`
       );
       const data = await res.json();
@@ -466,7 +466,7 @@ export const InteractiveMap: React.FC<InteractiveMapProps> = ({
         const searchMarker = L.marker([latitude, longitude]).addTo(mapInstanceRef.current);
         searchMarker.bindPopup(`<strong>${display_name}</strong>`).openPopup();
       } else {
-        alert(`Location "${searchQuery}" not found. Try searching a Mysuru landmark (e.g. Kuvempunagar, Vijayanagar, Mysuru Palace).`);
+        alert(`Location "${searchQuery}" not found. Try searching a Bengaluru landmark (e.g. Indiranagar, Vidhana Soudha, Koramangala, MG Road).`);
       }
     } catch (err) {
       console.error('Search error:', err);
@@ -494,7 +494,7 @@ export const InteractiveMap: React.FC<InteractiveMapProps> = ({
               type="text"
               value={searchQuery}
               onChange={e => setSearchQuery(e.target.value)}
-              placeholder="Search Mysuru place, street, or GPS..."
+              placeholder="Search Bengaluru place (e.g. Indiranagar, MG Road)..."
               className="w-56 sm:w-72 px-3 py-1.5 pl-8 rounded-lg bg-slate-900/90 backdrop-blur-md border border-slate-700 text-xs text-white placeholder-slate-400 focus:outline-none focus:border-sky-500 shadow-md"
             />
             <Search className="w-3.5 h-3.5 text-slate-400 absolute left-2.5 top-1/2 -translate-y-1/2" />
@@ -513,7 +513,7 @@ export const InteractiveMap: React.FC<InteractiveMapProps> = ({
           <button
             onClick={flyToProjectSector}
             className="flex items-center gap-1 px-2 py-0.5 rounded text-[11px] font-bold text-sky-400 hover:bg-sky-950/60 transition-colors"
-            title="Fit to 25 Mysuru Land Parcels"
+            title="Fit to 25 Bengaluru Land Parcels (Indiranagar)"
           >
             <MapPin className="w-3 h-3" />
             <span>Project Sector</span>
@@ -533,11 +533,11 @@ export const InteractiveMap: React.FC<InteractiveMapProps> = ({
           <span className="text-slate-600">|</span>
 
           <button
-            onClick={() => mapInstanceRef.current?.flyTo([12.3051, 76.6551], 17, { duration: 1.0 })}
+            onClick={() => mapInstanceRef.current?.flyTo([12.9797, 77.5907], 17, { duration: 1.0 })}
             className="px-2 py-0.5 rounded text-[11px] text-amber-400 hover:bg-amber-950/60 transition-colors"
-            title="Fly to Mysuru Palace Landmark"
+            title="Fly to Vidhana Soudha Landmark (Bengaluru)"
           >
-            Palace
+            Vidhana Soudha
           </button>
         </div>
       </div>
@@ -584,7 +584,7 @@ export const InteractiveMap: React.FC<InteractiveMapProps> = ({
         {/* Recenter Project Sector */}
         <button
           onClick={flyToProjectSector}
-          title="Recenter Mysuru Parcels"
+          title="Recenter Bengaluru Parcels"
           className="p-1.5 rounded-lg bg-slate-900/90 border border-slate-700 shadow-md text-slate-300 hover:text-sky-400 transition-colors"
         >
           <Crosshair className="w-4 h-4" />

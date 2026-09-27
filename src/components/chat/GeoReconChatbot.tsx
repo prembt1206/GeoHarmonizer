@@ -32,7 +32,7 @@ import {
 const SUGGESTED_PROMPTS = [
   { label: '🔍 Explain P-0102 Conflict', query: 'Why does Parcel P-0102 have a boundary conflict and what is the recommended resolution?' },
   { label: '📐 Explain IoU Matching', query: 'How does Intersection over Union (IoU) and Hausdorff distance work in matching cadastral vs drone layers?' },
-  { label: '⚠️ Topology Anomalies', query: 'What topology issues exist in the current Mysuru dataset and how are slivers healed?' },
+  { label: '⚠️ Topology Anomalies', query: 'What topology issues exist in the current Bengaluru dataset and how are slivers healed?' },
   { label: '🏆 SIH26013 Judge Overview', query: 'Give me a 60-second executive pitch for Smart India Hackathon judges explaining GeoRecon AI.' }
 ];
 
@@ -69,7 +69,7 @@ export const GeoReconChatbot: React.FC = () => {
       content: `### Welcome to GeoRecon Copilot 🛰️
 I am your **Gemini 3.8 Flash AI Geospatial Assistant** for **Smart India Hackathon SIH26013**.
 
-I have real-time access to the **Mysuru Urban Land Records Sector** (${parcels.length} parcels, ${conflicts.filter(c => c.status === 'open').length} open conflicts, EPSG:32643).
+I have real-time access to the **Bengaluru Urban Land Records Sector (Indiranagar / Domlur)** (${parcels.length} parcels, ${conflicts.filter(c => c.status === 'open').length} open conflicts, EPSG:32643).
 
 Ask me about:
 - **Boundary Discrepancies & Disputed Parcels** (e.g. Parcel P-0102)
@@ -290,7 +290,7 @@ Ask me about:
                   </span>
                 </div>
                 <p className="text-[10px] text-slate-400">
-                  {selectedParcelId ? `Context: Parcel ${selectedParcelId}` : 'Mysuru Urban Cadastral Engine'}
+                  {selectedParcelId ? `Context: Parcel ${selectedParcelId}` : 'Bengaluru Urban Cadastral Engine'}
                 </p>
               </div>
             </div>
@@ -326,7 +326,7 @@ Ask me about:
               <div className="px-3.5 py-1.5 bg-slate-950/70 border-b border-slate-800/80 flex items-center justify-between text-[10px] text-slate-400 shrink-0">
                 <div className="flex items-center gap-1.5 truncate">
                   <MapPin className="w-3 h-3 text-sky-400 shrink-0" />
-                  <span className="truncate">Mysuru Sector • {settings.projectCrs}</span>
+                  <span className="truncate">Bengaluru Sector • {settings.projectCrs}</span>
                 </div>
                 <span className="font-mono text-emerald-400 font-semibold shrink-0">
                   {parcels.length} Parcels Active

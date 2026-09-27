@@ -22,16 +22,16 @@ export const CrsEngine: React.FC = () => {
   const [isTransforming, setIsTransforming] = useState(false);
 
   // Coordinate converter test inputs
-  const [testLat, setTestLat] = useState('12.3120');
-  const [testLng, setTestLng] = useState('76.6430');
-  const [convertedCoords, setConvertedCoords] = useState<[number, number]>([1361200, 678400]);
+  const [testLat, setTestLat] = useState('12.9719');
+  const [testLng, setTestLng] = useState('77.6412');
+  const [convertedCoords, setConvertedCoords] = useState<[number, number]>([1434800, 786600]);
 
   const report = crsService.runCrsTransformation(sourceCrs, targetCrs, 24821);
 
   const handleConvert = () => {
     setIsTransforming(true);
-    const lat = parseFloat(testLat) || 12.312;
-    const lng = parseFloat(testLng) || 76.643;
+    const lat = parseFloat(testLat) || 12.9719;
+    const lng = parseFloat(testLng) || 77.6412;
     const res = crsService.transformCoordinates(lat, lng, sourceCrs, targetCrs);
     setTimeout(() => {
       setConvertedCoords(res);

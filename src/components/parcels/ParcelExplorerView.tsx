@@ -60,7 +60,7 @@ export const ParcelExplorerView: React.FC = () => {
               <span className="px-2.5 py-0.5 rounded-full text-xs font-bold uppercase tracking-wider bg-sky-500/10 text-sky-600 dark:text-sky-400 border border-sky-500/20">
                 Land Register Browser
               </span>
-              <span className="text-xs text-slate-500">Mysuru Urban Sector (Ward 14)</span>
+              <span className="text-xs text-slate-500">Bengaluru Urban Sector (Ward 112 - Domlur / Indiranagar)</span>
             </div>
             <h1 className="text-2xl font-bold tracking-tight text-slate-900 dark:text-white mt-1">
               Interactive Parcel Explorer

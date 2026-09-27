@@ -227,7 +227,7 @@ export const CanonicalRecordsView: React.FC = () => {
   },
   geometry: {
     type: "Polygon",
-    coordinates: "[[ [76.6430, 12.3120], ... ]]"
+    coordinates: "[[ [77.6412, 12.9719], ... ]]"
   }
 }, null, 2)}
           </pre>
