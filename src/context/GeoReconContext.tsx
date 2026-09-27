@@ -164,15 +164,38 @@ export const GeoReconProvider: React.FC<{ children: ReactNode }> = ({ children }
 
         if (isMounted) {
           if (cloudParcels && cloudParcels.length > 0) {
-            setParcels(cloudParcels);
+            setParcels(prev => {
+              const cloudMap = new Map(cloudParcels.map(p => [p.parcel_id, p]));
+              const merged = prev.map(p => cloudMap.get(p.parcel_id) || p);
+              cloudParcels.forEach(cp => {
+                if (!prev.some(p => p.parcel_id === cp.parcel_id)) {
+                  merged.push(cp);
+                }
+              });
+              return merged;
+            });
             console.log(`[GeoRecon AI] Synchronized ${cloudParcels.length} parcels from Supabase Cloud`);
           }
           if (cloudDatasets && cloudDatasets.length > 0) {
-            setDatasets(cloudDatasets);
+            setDatasets(prev => {
+              const cloudMap = new Map(cloudDatasets.map(d => [d.id, d]));
+              const merged = prev.map(d => cloudMap.get(d.id) || d);
+              cloudDatasets.forEach(cd => {
+                if (!prev.some(d => d.id === cd.id)) merged.push(cd);
+              });
+              return merged;
+            });
             console.log(`[GeoRecon AI] Synchronized ${cloudDatasets.length} datasets from Supabase Cloud`);
           }
           if (cloudConflicts && cloudConflicts.length > 0) {
-            setConflicts(cloudConflicts);
+            setConflicts(prev => {
+              const cloudMap = new Map(cloudConflicts.map(c => [c.id, c]));
+              const merged = prev.map(c => cloudMap.get(c.id) || c);
+              cloudConflicts.forEach(cc => {
+                if (!prev.some(c => c.id === cc.id)) merged.push(cc);
+              });
+              return merged;
+            });
             console.log(`[GeoRecon AI] Synchronized ${cloudConflicts.length} conflicts from Supabase Cloud`);
           }
         }
