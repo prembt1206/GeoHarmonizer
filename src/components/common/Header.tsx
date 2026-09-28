@@ -12,7 +12,9 @@ import {
   CheckCircle2,
   Info,
   Database,
-  Bot
+  Bot,
+  LogOut,
+  LogIn
 } from 'lucide-react';
 import { useGeoRecon } from '../../context/GeoReconContext';
 import { UserRole } from '../../types/geospatial';
@@ -28,7 +30,10 @@ export const Header: React.FC = () => {
     runFullHarmonization,
     resetDemoData,
     setIsJudgeTourOpen,
-    setIsChatOpen
+    setIsChatOpen,
+    currentUser,
+    logout,
+    setShowLoginPage
   } = useGeoRecon();
 
 
@@ -166,6 +171,57 @@ export const Header: React.FC = () => {
               </select>
             </div>
           </div>
+
+          {/* User Profile & Sign Out / In */}
+          {currentUser ? (
+            <div className="flex items-center gap-1.5 pl-1.5 border-l border-slate-800">
+              <div
+                title={`${currentUser.name} (${currentUser.department}) - Clearance: ${currentUser.clearanceLevel}`}
+                className="hidden sm:flex items-center gap-2 p-1 pl-1.5 pr-2.5 rounded-lg bg-slate-800/90 border border-slate-700/80 text-xs"
+              >
+                <div className="relative">
+                  <img
+                    src={currentUser.avatarUrl || `https://api.dicebear.com/7.x/bottts/svg?seed=${currentUser.email}`}
+                    alt="Officer avatar"
+                    className="w-6 h-6 rounded-full bg-slate-700 border border-sky-400/40 object-cover"
+                  />
+                  {currentUser.provider === 'google' && (
+                    <span
+                      className="absolute -bottom-0.5 -right-0.5 w-2 h-2 bg-blue-500 rounded-full border border-slate-900"
+                      title="Google OAuth Verified"
+                    />
+                  )}
+                </div>
+                <div className="text-left leading-tight hidden lg:block">
+                  <div className="text-[11px] font-bold text-slate-200 truncate max-w-[110px]">
+                    {currentUser.name}
+                  </div>
+                  <div className="text-[9px] text-sky-400 font-semibold truncate max-w-[110px]">
+                    {currentUser.badgeNumber}
+                  </div>
+                </div>
+              </div>
+
+              <button
+                type="button"
+                onClick={logout}
+                title="Sign Out / Switch Officer"
+                className="p-1.5 sm:px-2 sm:py-1.5 rounded-lg text-xs font-semibold text-slate-300 hover:text-white hover:bg-slate-800 border border-slate-700/60 transition-colors flex items-center gap-1 cursor-pointer"
+              >
+                <LogOut className="w-3.5 h-3.5 text-rose-400" />
+                <span className="hidden xl:inline text-[11px]">Sign Out</span>
+              </button>
+            </div>
+          ) : (
+            <button
+              type="button"
+              onClick={() => setShowLoginPage(true)}
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold bg-sky-600 hover:bg-sky-500 text-white shadow-sm transition-all cursor-pointer"
+            >
+              <LogIn className="w-3.5 h-3.5" />
+              <span>Sign In</span>
+            </button>
+          )}
         </div>
       </div>
     </header>

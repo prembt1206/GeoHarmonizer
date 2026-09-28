@@ -21,7 +21,8 @@ import {
   HelpCircle,
   Compass,
   Bot,
-  Sparkles
+  Sparkles,
+  LogOut
 } from 'lucide-react';
 import { useGeoRecon, NavPage } from '../../context/GeoReconContext';
 
@@ -43,7 +44,10 @@ export const Sidebar: React.FC = () => {
     changes,
     parcels,
     datasets,
-    setIsChatOpen
+    setIsChatOpen,
+    currentUser,
+    logout,
+    setShowLoginPage
   } = useGeoRecon();
 
 
@@ -155,6 +159,36 @@ export const Sidebar: React.FC = () => {
           <span>Launch AI Assistant</span>
         </button>
       </div>
+
+      {/* Active Officer Identity Card */}
+      {currentUser && (
+        <div className="mb-3 p-2.5 rounded-xl bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-800 dark:text-slate-200 flex items-center justify-between gap-2">
+          <div className="flex items-center gap-2 min-w-0">
+            <div className="relative">
+              <img
+                src={currentUser.avatarUrl || `https://api.dicebear.com/7.x/bottts/svg?seed=${currentUser.email}`}
+                alt="Avatar"
+                className="w-7 h-7 rounded-full bg-slate-200 dark:bg-slate-800 border border-sky-500/40 object-cover shrink-0"
+              />
+              {currentUser.provider === 'google' && (
+                <span className="absolute -bottom-0.5 -right-0.5 w-2 h-2 bg-blue-500 rounded-full border border-slate-900" title="Google OAuth Verified" />
+              )}
+            </div>
+            <div className="min-w-0">
+              <div className="text-xs font-bold truncate">{currentUser.name}</div>
+              <div className="text-[10px] text-sky-600 dark:text-sky-400 truncate">{currentUser.badgeNumber}</div>
+            </div>
+          </div>
+          <button
+            type="button"
+            onClick={logout}
+            title="Sign Out / Switch Officer"
+            className="p-1.5 rounded-lg text-slate-400 hover:text-rose-500 hover:bg-rose-50 dark:hover:bg-rose-950/40 transition-colors shrink-0 cursor-pointer"
+          >
+            <LogOut className="w-3.5 h-3.5" />
+          </button>
+        </div>
+      )}
 
       {/* System Health Footer */}
       <div className="pt-3 border-t border-slate-200 dark:border-slate-800 text-[11px] text-slate-500 dark:text-slate-400 space-y-1.5">

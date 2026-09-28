@@ -24,10 +24,15 @@ import { SettingsView } from './components/settings/SettingsView';
 import { ArchitectureAboutView } from './components/about/ArchitectureAboutView';
 import { JudgeTourModal } from './components/judge/JudgeTourModal';
 import { GeoReconChatbot } from './components/chat/GeoReconChatbot';
+import { LoginView } from './components/auth/LoginView';
 
 
 const AppContent: React.FC = () => {
-  const { activePage } = useGeoRecon();
+  const { activePage, showLoginPage } = useGeoRecon();
+
+  if (showLoginPage) {
+    return <LoginView />;
+  }
 
   const renderActivePage = () => {
     switch (activePage) {

@@ -27,7 +27,8 @@ import {
 } from '../data/bengaluruDemoData';
 import { topologyService } from '../services/topologyService';
 import { conflictResolutionService } from '../services/conflictResolutionService';
-import { supabaseDb, isSupabaseConfigured } from '../services/supabaseClient';
+import { supabase, supabaseDb, isSupabaseConfigured } from '../services/supabaseClient';
+import { authService, AuthUser, ROLE_METADATA } from '../services/authService';
 
 export type NavPage =
   | 'overview'
@@ -105,6 +106,15 @@ interface GeoReconContextType {
   setIsChatOpen: (open: boolean) => void;
   selectedConflictId: string | null;
   setSelectedConflictId: (id: string | null) => void;
+
+  currentUser: AuthUser | null;
+  isAuthenticated: boolean;
+  showLoginPage: boolean;
+  setShowLoginPage: (show: boolean) => void;
+  loginWithGoogle: () => Promise<{ error?: string }>;
+  loginWithGoogleMock: (email?: string, name?: string, role?: UserRole) => void;
+  loginWithDepartment: (role: UserRole, officerName?: string) => void;
+  logout: () => Promise<void>;
 }
 
 const GeoReconContext = createContext<GeoReconContextType | undefined>(undefined);
@@ -126,6 +136,9 @@ export const GeoReconProvider: React.FC<{ children: ReactNode }> = ({ children }
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [isJudgeTourOpen, setIsJudgeTourOpen] = useState<boolean>(false);
   const [isChatOpen, setIsChatOpen] = useState<boolean>(false);
+
+  const [currentUser, setCurrentUser] = useState<AuthUser | null>(() => authService.getLocalUser());
+  const [showLoginPage, setShowLoginPage] = useState<boolean>(() => !authService.getLocalUser());
 
 
   const [isHarmonizing, setIsHarmonizing] = useState<boolean>(false);
@@ -207,6 +220,78 @@ export const GeoReconProvider: React.FC<{ children: ReactNode }> = ({ children }
     loadCloudData();
     return () => { isMounted = false; };
   }, []);
+
+  // Listen to Supabase Auth State Changes and Session Initialization
+  useEffect(() => {
+    authService.initSupabaseSession().then(user => {
+      if (user) {
+        setCurrentUser(user);
+        setUserRole(user.role);
+        setShowLoginPage(false);
+      }
+    });
+
+    if (supabase) {
+      const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
+        if (session?.user) {
+          const u = session.user;
+          const meta = u.user_metadata || {};
+          const email = u.email || 'user@gmail.com';
+          const name = meta.full_name || meta.name || email.split('@')[0];
+          const avatarUrl = meta.avatar_url || meta.picture || `https://api.dicebear.com/7.x/bottts/svg?seed=${encodeURIComponent(email)}`;
+          const authUser: AuthUser = {
+            id: u.id,
+            email,
+            name,
+            avatarUrl,
+            role: (meta.role as UserRole) || 'gis_analyst',
+            department: meta.department || ROLE_METADATA.gis_analyst.department,
+            jurisdiction: meta.jurisdiction || ROLE_METADATA.gis_analyst.jurisdiction,
+            clearanceLevel: ROLE_METADATA.gis_analyst.clearance,
+            provider: 'google',
+            badgeNumber: `GOOGLE-OAUTH-${u.id.slice(0, 6).toUpperCase()}`,
+            loginTime: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+          };
+          setCurrentUser(authUser);
+          setUserRole(authUser.role);
+          setShowLoginPage(false);
+          authService.saveLocalUser(authUser);
+        } else if (event === 'SIGNED_OUT') {
+          setCurrentUser(null);
+          setShowLoginPage(true);
+        }
+      });
+      return () => {
+        subscription.unsubscribe();
+      };
+    }
+  }, []);
+
+  const loginWithGoogle = async () => {
+    return await authService.signInWithGoogle();
+  };
+
+  const loginWithGoogleMock = (email?: string, name?: string, role: UserRole = 'gis_analyst') => {
+    const user = authService.signInWithGoogleMock(email, name, role);
+    setCurrentUser(user);
+    setUserRole(user.role);
+    setShowLoginPage(false);
+    confetti({ particleCount: 80, spread: 60, origin: { y: 0.6 } });
+  };
+
+  const loginWithDepartment = (role: UserRole, officerName?: string) => {
+    const user = authService.signInWithDepartmentRole(role, officerName);
+    setCurrentUser(user);
+    setUserRole(user.role);
+    setShowLoginPage(false);
+    confetti({ particleCount: 70, spread: 50, origin: { y: 0.6 } });
+  };
+
+  const logout = async () => {
+    await authService.signOut();
+    setCurrentUser(null);
+    setShowLoginPage(true);
+  };
 
   const addAuditEntry = (action: string, targetObject: string, notes?: string, status: AuditLogEntry['status'] = 'Success') => {
     const entry: AuditLogEntry = {
@@ -435,7 +520,15 @@ export const GeoReconProvider: React.FC<{ children: ReactNode }> = ({ children }
         isJudgeTourOpen,
         setIsJudgeTourOpen,
         isChatOpen,
-        setIsChatOpen
+        setIsChatOpen,
+        currentUser,
+        isAuthenticated: Boolean(currentUser),
+        showLoginPage,
+        setShowLoginPage,
+        loginWithGoogle,
+        loginWithGoogleMock,
+        loginWithDepartment,
+        logout
       }}
 
     >
