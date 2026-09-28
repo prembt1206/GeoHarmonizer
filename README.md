@@ -1,4 +1,4 @@
-# GeoRecon AI: Multi-Source Geospatial Harmonization for Urban Land Records
+# GeoHarmonizer AI: Multi-Source Geospatial Harmonization for Urban Land Records
 
 > **Smart India Hackathon 2026 Prototype — Problem Statement SIH26013**  
 > *"Automated Integration and Intelligent Harmonization of Multi-source Geospatial Data for Urban Land Record Management."*
@@ -20,7 +20,7 @@ Urban land records in India suffer from severe institutional fragmentation. A si
 3. **Survey of India / Drone Orthomosaic:** High-resolution sub-decimeter aerial drone photography.
 4. **CORS Network:** Millimeter-precision GNSS ground control benchmarks.
 
-**GeoRecon AI** delivers an end-to-end automated 10-stage reconciliation engine that eliminates boundary discrepancies, heals topological slivers, resolves ownership/tax conflicts, and publishes an authoritative **Canonical Harmonized Land Parcel Layer** backed by explainable 5-factor confidence scoring.
+**GeoHarmonizer AI** delivers an end-to-end automated 10-stage reconciliation engine that eliminates boundary discrepancies, heals topological slivers, resolves ownership/tax conflicts, and publishes an authoritative **Canonical Harmonized Land Parcel Layer** backed by explainable 5-factor confidence scoring.
 
 ---
 
@@ -45,7 +45,7 @@ Urban land records in India suffer from severe institutional fragmentation. A si
 - **Real-Time Coordinates Strip:** Cursor lat/long and projected UTM Zone 43N metric coordinates ($X, Y$ in meters).
 - **Metric Scale Bar & Fullscreen Mode.**
 
-### 3. 🤖 GeoRecon Copilot (Gemini 3.8 Flash AI)
+### 3. 🤖 GeoHarmonizer Copilot (Gemini 3.8 Flash AI)
 - Conversational geospatial intelligence with live application context awareness.
 - Capable of explaining boundary conflicts, IoU formulas, and PostGIS snapping routines.
 - Includes **Interactive Action Chips**: AI can navigate the app and inspect specific parcels on command.

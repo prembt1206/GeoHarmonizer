@@ -1,4 +1,4 @@
-// GeoRecon AI - High-Precision Drone Photogrammetry & UAV Survey Engine
+// GeoHarmonizer AI - High-Precision Drone Photogrammetry & UAV Survey Engine
 // Standards: Survey of India SVAMITVA UAV Guidelines & DGCA SOP for Urban Cadastral Drone Mapping
 
 export interface DroneCameraStation {

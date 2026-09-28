@@ -1,4 +1,4 @@
-// GeoRecon AI - AI Spatial Matching View (SIH26013 - Section 12)
+// GeoHarmonizer AI - AI Spatial Matching View (SIH26013 - Section 12)
 
 import React, { useState } from 'react';
 import {

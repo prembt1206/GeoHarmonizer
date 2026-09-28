@@ -1,4 +1,4 @@
-// GeoRecon AI - Main Application Entrypoint (SIH26013)
+// GeoHarmonizer AI - Main Application Entrypoint (SIH26013)
 
 import React from 'react';
 import { GeoReconProvider, useGeoRecon } from './context/GeoReconContext';

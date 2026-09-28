@@ -1,4 +1,4 @@
-// GeoRecon AI - Enterprise Sidebar Navigation (SIH26013)
+// GeoHarmonizer AI - Enterprise Sidebar Navigation (SIH26013)
 
 import React from 'react';
 import {
@@ -138,7 +138,7 @@ export const Sidebar: React.FC = () => {
         <div className="flex items-center justify-between mb-1.5">
           <div className="flex items-center gap-1.5">
             <Bot className="w-4 h-4 text-purple-400" />
-            <span className="text-xs font-bold text-purple-200">GeoRecon Copilot</span>
+            <span className="text-xs font-bold text-purple-200">GeoHarmonizer Copilot</span>
           </div>
           <span className="px-1.5 py-0.2 rounded text-[9px] font-bold bg-purple-500/20 text-purple-300 border border-purple-500/40">
             Gemini 3.8

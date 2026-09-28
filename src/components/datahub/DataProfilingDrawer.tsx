@@ -1,4 +1,4 @@
-// GeoRecon AI - Dataset Profiling Drawer (SIH26013)
+// GeoHarmonizer AI - Dataset Profiling Drawer (SIH26013)
 
 import React from 'react';
 import { X, Sparkles, CheckCircle2, AlertTriangle, Database, MapPin, Hash, Layers } from 'lucide-react';
@@ -92,7 +92,7 @@ export const DataProfilingDrawer: React.FC<DataProfilingDrawerProps> = ({
                   Potential Canonical Field Mappings Detected
                 </span>
                 <p className="text-[11px] text-sky-800/80 dark:text-sky-300/80 leading-relaxed">
-                  GeoRecon AI analyzed the attribute schemas. Candidate target fields in the National Canonical Model have been identified with &gt;90% semantic confidence.
+                  GeoHarmonizer AI analyzed the attribute schemas. Candidate target fields in the National Canonical Model have been identified with &gt;90% semantic confidence.
                 </p>
                 {onNavigateToMapping && (
                   <button

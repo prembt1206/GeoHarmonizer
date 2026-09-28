@@ -1,4 +1,4 @@
-// GeoRecon AI - AI Spatial Matching Service (SIH26013)
+// GeoHarmonizer AI - AI Spatial Matching Service (SIH26013)
 // Evaluates multi-source feature correspondence using geometric & attribute similarity
 
 import { SpatialMatchResult } from '../types/geospatial';

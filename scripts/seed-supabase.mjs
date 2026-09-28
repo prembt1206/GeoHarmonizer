@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 // ==============================================================================
-// GeoRecon AI: Multi-Source Geospatial Harmonization (SIH26013)
+// GeoHarmonizer AI: Multi-Source Geospatial Harmonization (SIH26013)
 // Direct Supabase Service Role Seed & Sync Runner
 // ==============================================================================
 
@@ -13,7 +13,7 @@ const supabaseUrl = process.env.VITE_SUPABASE_URL;
 const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
 
 console.log('\n' + '='.repeat(70));
-console.log('  GEORECON AI — SUPABASE SERVICE ROLE SEED & SYNC RUNNER');
+console.log('  GEOHARMONIZER AI — SUPABASE SERVICE ROLE SEED & SYNC RUNNER');
 console.log('='.repeat(70));
 
 if (!supabaseUrl || !serviceRoleKey) {

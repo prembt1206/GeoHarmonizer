@@ -1,4 +1,4 @@
-// GeoRecon AI - Data Exchange & Synchronization Service (SIH26013)
+// GeoHarmonizer AI - Data Exchange & Synchronization Service (SIH26013)
 // Handles exporting harmonized datasets, validation reports, and downstream sync
 
 import { HarmonizedParcel } from '../types/geospatial';
@@ -30,7 +30,7 @@ export const syncService = {
         properties: { name: 'urn:ogc:def:crs:EPSG::4326' }
       },
       metadata: {
-        generator: 'GeoRecon AI v2.4 (SIH26013 Prototype)',
+        generator: 'GeoHarmonizer AI v2.4 (SIH26013 Prototype)',
         harmonizedAt: new Date().toISOString(),
         totalParcels: parcels.length,
         authority: 'Bengaluru Urban Land Harmonization Demo (BBMP & SSLR)'

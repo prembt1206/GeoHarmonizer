@@ -1,4 +1,4 @@
-// GeoRecon AI - Spatial Conflict Resolution Service (SIH26013)
+// GeoHarmonizer AI - Spatial Conflict Resolution Service (SIH26013)
 // Resolves boundary, area, land-use and attribute discrepancies across departments
 
 import { HarmonizationConflict } from '../types/geospatial';

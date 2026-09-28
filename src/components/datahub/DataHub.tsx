@@ -1,4 +1,4 @@
-// GeoRecon AI - Multi-Source Data Hub View (SIH26013 - Section 7)
+// GeoHarmonizer AI - Multi-Source Data Hub View (SIH26013 - Section 7)
 
 import React, { useState } from 'react';
 import {

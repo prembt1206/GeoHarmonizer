@@ -1,4 +1,4 @@
-// GeoRecon AI - 3-Minute Guided Judge Tour (SIH26013 - Section 30)
+// GeoHarmonizer AI - 3-Minute Guided Judge Tour (SIH26013 - Section 30)
 
 import React, { useState } from 'react';
 import {
@@ -41,7 +41,7 @@ export const JudgeTourModal: React.FC = () => {
       title: 'Unified Projection & Multi-Factor Spatial Matching',
       icon: Cpu,
       content:
-        'GeoRecon AI ingests heterogeneous layers, transforms coordinates to EPSG:32643 (UTM Zone 43N), and calculates multi-factor spatial correspondence using IoU polygon overlap, centroid Euclidean proximity, and Hausdorff shape compactness.',
+        'GeoHarmonizer AI ingests heterogeneous layers, transforms coordinates to EPSG:32643 (UTM Zone 43N), and calculates multi-factor spatial correspondence using IoU polygon overlap, centroid Euclidean proximity, and Hausdorff shape compactness.',
       targetActionText: 'View AI Spatial Matching Matrix',
       targetPage: 'spatial-matching' as const
     },
@@ -61,7 +61,7 @@ export const JudgeTourModal: React.FC = () => {
       title: 'Transparent Arbitration Calibrated to CORS GNSS',
       icon: Compass,
       content:
-        'When departments disagree, GeoRecon AI weights evidence against high-precision Survey of India CORS benchmarks and drone photogrammetry. For Parcel P-0102, AI resolves the 1.2m offset to the GNSS ground-verified 182.0 m² boundary with 96.4% confidence.',
+        'When departments disagree, GeoHarmonizer AI weights evidence against high-precision Survey of India CORS benchmarks and drone photogrammetry. For Parcel P-0102, AI resolves the 1.2m offset to the GNSS ground-verified 182.0 m² boundary with 96.4% confidence.',
       targetActionText: 'Open Conflict Resolution Center',
       targetPage: 'conflict-center' as const
     },

@@ -1,4 +1,4 @@
-// GeoRecon AI - Coordinate Reference System & Georeferencing Service (SIH26013)
+// GeoHarmonizer AI - Coordinate Reference System & Georeferencing Service (SIH26013)
 
 export interface CrsDefinition {
   code: string;

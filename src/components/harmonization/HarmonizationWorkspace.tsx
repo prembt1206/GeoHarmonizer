@@ -1,4 +1,4 @@
-// GeoRecon AI - AI Harmonization Workspace (SIH26013 - Section 11)
+// GeoHarmonizer AI - AI Harmonization Workspace (SIH26013 - Section 11)
 
 import React from 'react';
 import {

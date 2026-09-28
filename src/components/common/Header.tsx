@@ -1,4 +1,4 @@
-// GeoRecon AI - Main Application Header (SIH26013)
+// GeoHarmonizer AI - Main Application Header (SIH26013)
 
 import React from 'react';
 import {
@@ -52,7 +52,7 @@ export const Header: React.FC = () => {
           <div>
             <div className="flex items-center gap-2">
               <span className="font-extrabold text-base tracking-tight bg-gradient-to-r from-white via-sky-100 to-sky-400 bg-clip-text text-transparent">
-                GeoRecon AI
+                GeoHarmonizer AI
               </span>
               <span className="px-1.5 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider bg-sky-500/20 text-sky-400 border border-sky-500/30">
                 SIH26013
@@ -118,7 +118,7 @@ export const Header: React.FC = () => {
           <button
             onClick={() => setIsChatOpen(true)}
             className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white shadow-sm transition-all shadow-purple-600/20 active:scale-95 border border-purple-400/30"
-            title="Open GeoRecon AI Copilot (Powered by Google Gemini 3.8 Flash)"
+            title="Open GeoHarmonizer AI Copilot (Powered by Google Gemini 3.8 Flash)"
           >
             <Bot className="w-3.5 h-3.5 text-purple-200" />
             <span>AI Copilot</span>

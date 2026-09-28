@@ -1,4 +1,4 @@
-// GeoRecon AI - Spatial Validation Center (SIH26013 - Section 14)
+// GeoHarmonizer AI - Spatial Validation Center (SIH26013 - Section 14)
 
 import React, { useState } from 'react';
 import {

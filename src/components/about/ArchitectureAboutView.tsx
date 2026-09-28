@@ -1,4 +1,4 @@
-// GeoRecon AI - Architecture, Product Positioning & SIH26013 Traceability (Sections 50-53)
+// GeoHarmonizer AI - Architecture, Product Positioning & SIH26013 Traceability (Sections 50-53)
 
 import React from 'react';
 import {
@@ -54,10 +54,10 @@ export const ArchitectureAboutView: React.FC = () => {
           <span className="text-xs text-slate-500">SIH26013 Hackathon Specification</span>
         </div>
         <h1 className="text-2xl font-bold tracking-tight text-slate-900 dark:text-white mt-1">
-          About GeoRecon AI & System Architecture
+          About GeoHarmonizer AI & System Architecture
         </h1>
         <p className="mt-1 text-xs text-slate-500 dark:text-slate-400 max-w-3xl leading-relaxed">
-          GeoRecon AI is an AI-powered multi-source geospatial reconciliation and intelligent harmonization platform engineered specifically for Smart India Hackathon 2026 Problem Statement SIH26013.
+          GeoHarmonizer AI is an AI-powered multi-source geospatial reconciliation and intelligent harmonization platform engineered specifically for Smart India Hackathon 2026 Problem Statement SIH26013.
         </p>
       </div>
 
@@ -67,7 +67,7 @@ export const ArchitectureAboutView: React.FC = () => {
           Core Product Positioning
         </span>
         <h2 className="text-xl font-extrabold mt-1 text-white leading-snug">
-          “GeoRecon AI is the reconciliation and harmonization layer between fragmented geospatial sources and a trusted canonical urban land record.”
+          “GeoHarmonizer AI is the reconciliation and harmonization layer between fragmented geospatial sources and a trusted canonical urban land record.”
         </h2>
         <p className="mt-2 text-xs text-slate-300 max-w-2xl leading-relaxed">
           It is not merely a GIS viewer or mapping app. It is an automated reconciliation engine that ingests conflicting departmental records, resolves geometric and semantic discrepancies using CORS GNSS evidence, and outputs an auditable canonical land register.

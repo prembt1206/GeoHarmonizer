@@ -1,4 +1,4 @@
-// GeoRecon AI - Essential SIH26013 Before / After Harmonization Visualizer
+// GeoHarmonizer AI - Essential SIH26013 Before / After Harmonization Visualizer
 // Real Geospatial Basemaps: Esri Satellite, Hybrid, OpenStreetMap
 
 import React, { useEffect, useRef, useState, useCallback } from 'react';
@@ -263,7 +263,7 @@ export const BeforeAfterMap: React.FC = () => {
               </h2>
             </div>
             <p className="mt-1 text-xs text-slate-500 dark:text-slate-400">
-              Direct visual proof of how GeoRecon AI eliminates multi-departmental boundary mismatches, topology overlaps, and area disputes on real satellite imagery.
+              Direct visual proof of how GeoHarmonizer AI eliminates multi-departmental boundary mismatches, topology overlaps, and area disputes on real satellite imagery.
             </p>
           </div>
 
@@ -445,7 +445,7 @@ export const BeforeAfterMap: React.FC = () => {
             </div>
           </div>
 
-          {/* GeoRecon AI Reconciled Output */}
+          {/* GeoHarmonizer AI Reconciled Output */}
           <div className="p-3 rounded-lg bg-emerald-50/80 dark:bg-emerald-950/30 border border-emerald-300 dark:border-emerald-800">
             <span className="font-bold text-emerald-700 dark:text-emerald-400 block mb-1">4. Harmonized Canonical Record</span>
             <div className="space-y-0.5 text-slate-700 dark:text-slate-300">

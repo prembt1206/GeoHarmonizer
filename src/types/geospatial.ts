@@ -1,4 +1,4 @@
-// GeoRecon AI - Type Definitions for SIH26013 Geospatial Harmonization
+// GeoHarmonizer AI - Type Definitions for SIH26013 Geospatial Harmonization
 
 export type DatasetCategory =
   | 'drone'

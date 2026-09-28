@@ -1,4 +1,4 @@
-// GeoRecon AI - Synthetic Demo Data Engine
+// GeoHarmonizer AI - Synthetic Demo Data Engine
 // Project: Bengaluru Urban Land Harmonization Demo (SIH26013)
 // Synthetic data modeled on Bengaluru (Indiranagar / Domlur Sector)
 

@@ -1,4 +1,4 @@
-// GeoRecon AI - Audit Trail & Provenance Ledger (SIH26013 - Section 23)
+// GeoHarmonizer AI - Audit Trail & Provenance Ledger (SIH26013 - Section 23)
 
 import React, { useState } from 'react';
 import {
@@ -39,7 +39,7 @@ export const AuditTrailView: React.FC = () => {
         `"${l.timestamp}","${l.userName}","${l.userRole}","${l.action}","${l.targetObject}","${l.previousValue || ''}","${l.newValue || ''}","${l.status}","${l.notes || ''}"`
       )
     ].join('\n');
-    syncService.triggerDownload('GeoRecon_Audit_Trail_Ledger.csv', csvContent, 'text/csv');
+    syncService.triggerDownload('GeoHarmonizer_Audit_Trail_Ledger.csv', csvContent, 'text/csv');
   };
 
   return (

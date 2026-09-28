@@ -1,4 +1,4 @@
-// GeoRecon AI - Command Center Overview Dashboard (SIH26013)
+// GeoHarmonizer AI - Command Center Overview Dashboard (SIH26013)
 
 import React from 'react';
 import {

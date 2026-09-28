@@ -1,4 +1,4 @@
-// GeoRecon AI - Intelligent Attribute Mapping View (SIH26013 - Section 13)
+// GeoHarmonizer AI - Intelligent Attribute Mapping View (SIH26013 - Section 13)
 
 import React, { useState } from 'react';
 import {
@@ -61,7 +61,7 @@ export const AttributeMappingView: React.FC = () => {
           Intelligent Attribute Mapping
         </h1>
         <p className="mt-1 text-xs text-slate-500 dark:text-slate-400 max-w-3xl leading-relaxed">
-          GeoRecon AI employs fuzzy semantic inference and departmental domain heuristics to map non-standard field names (e.g. Municipal `property_id` and Cadastral `survey_no`) into a single Canonical Urban Land Record standard.
+          GeoHarmonizer AI employs fuzzy semantic inference and departmental domain heuristics to map non-standard field names (e.g. Municipal `property_id` and Cadastral `survey_no`) into a single Canonical Urban Land Record standard.
         </p>
       </div>
 

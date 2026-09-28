@@ -1,4 +1,4 @@
-// GeoRecon AI - Harmonization Conflict Center (SIH26013 - Section 17)
+// GeoHarmonizer AI - Harmonization Conflict Center (SIH26013 - Section 17)
 
 import React, { useState, useEffect } from 'react';
 import {

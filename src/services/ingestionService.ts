@@ -1,4 +1,4 @@
-// GeoRecon AI - Multi-Source Data Ingestion & Profiling Service (SIH26013)
+// GeoHarmonizer AI - Multi-Source Data Ingestion & Profiling Service (SIH26013)
 // Handles file parsing, schema detection, geometry validation, and attribute profiling
 
 import { Dataset, DatasetAttribute } from '../types/geospatial';

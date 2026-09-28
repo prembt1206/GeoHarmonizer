@@ -1,4 +1,4 @@
-// GeoRecon AI - Data Exchange & Downstream Synchronization (SIH26013 - Section 22)
+// GeoHarmonizer AI - Data Exchange & Downstream Synchronization (SIH26013 - Section 22)
 
 import React, { useState } from 'react';
 import {
@@ -24,21 +24,21 @@ export const DataExchangeView: React.FC = () => {
 
   const handleExportGeoJson = () => {
     const data = syncService.exportToGeoJson(parcels);
-    syncService.triggerDownload('GeoRecon_Bengaluru_Canonical_Parcels.geojson', data, 'application/geo+json');
+    syncService.triggerDownload('GeoHarmonizer_Bengaluru_Canonical_Parcels.geojson', data, 'application/geo+json');
   };
 
   const handleExportCsv = () => {
     const data = syncService.exportToCsv(parcels);
-    syncService.triggerDownload('GeoRecon_Bengaluru_Canonical_Parcels.csv', data, 'text/csv');
+    syncService.triggerDownload('GeoHarmonizer_Bengaluru_Canonical_Parcels.csv', data, 'text/csv');
   };
 
   const handleExportJson = () => {
     const data = JSON.stringify(parcels, null, 2);
-    syncService.triggerDownload('GeoRecon_Bengaluru_Parcels_Master.json', data, 'application/json');
+    syncService.triggerDownload('GeoHarmonizer_Bengaluru_Parcels_Master.json', data, 'application/json');
   };
 
   const handleDownloadValidationReport = () => {
-    const report = `# GeoRecon AI - Harmonization & Topology Validation Report
+    const report = `# GeoHarmonizer AI - Harmonization & Topology Validation Report
 Project: Bengaluru Urban Land Harmonization Demo (SIH26013)
 Generated: ${new Date().toLocaleString()}
 Authority: Survey Settlement & Land Records (SSLR) & Bruhat Bengaluru Mahanagara Palike (BBMP)
@@ -254,7 +254,7 @@ Status: Canonical Spatial Index Ready for Downstream GIS Ingestion.
 
         <div className="space-y-3 text-xs font-mono">
           <div className="p-3 rounded-lg bg-slate-950 text-slate-300 space-y-1">
-            <div className="text-emerald-400 font-bold">GET /api/v1/ogc/wfs?request=GetFeature&typename=georecon:canonical_parcels&srsname=EPSG:32643</div>
+            <div className="text-emerald-400 font-bold">GET /api/v1/ogc/wfs?request=GetFeature&typename=geoharmonizer:canonical_parcels&srsname=EPSG:32643</div>
             <div className="text-[11px] text-slate-400"># OGC Web Feature Service vector streaming endpoint for QGIS, ArcGIS, and state cadastral portals</div>
           </div>
 

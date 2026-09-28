@@ -1,4 +1,4 @@
-// GeoRecon AI - Gemini AI Chatbot Service (SIH26013)
+// GeoHarmonizer AI - Gemini AI Chatbot Service (SIH26013)
 
 export interface ChatMessage {
   id: string;
@@ -35,7 +35,7 @@ export const isGeminiConfigured = Boolean(
 );
 
 const SYSTEM_INSTRUCTION = `
-You are **GeoRecon Copilot**, the elite AI Geospatial & Urban Land Records Intelligence Assistant for **GeoRecon AI (Smart India Hackathon 2026 - SIH26013)**.
+You are **GeoHarmonizer Copilot**, the elite AI Geospatial & Urban Land Records Intelligence Assistant for **GeoHarmonizer AI (Smart India Hackathon 2026 - SIH26013)**.
 
 ### Your Mission & Context:
 You assist GIS analysts, municipal officers, revenue officers, and SIH hackathon judges in harmonizing multi-source geospatial data for urban land records (cadastral revenue sheets, drone orthophotos, municipal tax GIS, and CORS GNSS ground control).
@@ -209,7 +209,7 @@ export const geminiChatService = {
     if (q.includes('drone') || q.includes('uav') || q.includes('survey') || q.includes('photogrammetry') || q.includes('ortho')) {
       return {
         text: `### UAV Drone Photogrammetry Survey Engine (SVAMITVA Standards)
-GeoRecon AI incorporates high-precision UAV aerial photogrammetry adhering to **Survey of India SVAMITVA Guidelines & DGCA Urban Mapping SOP**:
+GeoHarmonizer AI incorporates high-precision UAV aerial photogrammetry adhering to **Survey of India SVAMITVA Guidelines & DGCA Urban Mapping SOP**:
 
 1. **Active Missions**:
    - **Mission 1 (Indiranagar / Domlur - Ward 112)**: 384 photos, 120m AGL, **4.8cm GSD**, 18.5 Ha coverage, 6 DGPS Ground Control Points (GCPs).
@@ -253,7 +253,7 @@ In our **Bengaluru Urban Land Sector (Indiranagar)**, Parcel **P-0102 (Survey No
     if (q.includes('iou') || q.includes('matching') || q.includes('algorithm')) {
       return {
         text: `### AI Spatial Matching & IoU Formula
-GeoRecon AI uses a multi-factor matching metric between disparate departmental polygons:
+GeoHarmonizer AI uses a multi-factor matching metric between disparate departmental polygons:
 
 $$\\text{IoU} = \\frac{\\text{Area}(A \\cap B)}{\\text{Area}(A \\cup B)}$$
 
@@ -283,7 +283,7 @@ Current project scan found **${appContext.topologyIssuesCount} topological anoma
     if (q.includes('judge') || q.includes('sih') || q.includes('overview') || q.includes('hackathon')) {
       return {
         text: `### SIH26013 Executive Summary for Hackathon Judges
-**GeoRecon AI** is a production-grade prototype for **Smart India Hackathon Problem SIH26013**:
+**GeoHarmonizer AI** is a production-grade prototype for **Smart India Hackathon Problem SIH26013**:
 - **Problem**: Multi-source urban land record fragmentation (Revenue Bhoomi, Municipal MCC, Drone Ortho, GNSS).
 - **Core Innovation**: Automated 10-stage AI pipeline eliminating manual reconciliation bottlenecks.
 - **Backend Architecture**: Enterprise PostgreSQL 15 + PostGIS with real-time Supabase Cloud synchronization.
@@ -297,7 +297,7 @@ Current project scan found **${appContext.topologyIssuesCount} topological anoma
 
     // General fallback
     return {
-      text: `Hello! I am your **GeoRecon Copilot**, connected to **Google Gemini 3.8 Flash**.
+      text: `Hello! I am your **GeoHarmonizer Copilot**, connected to **Google Gemini 3.8 Flash**.
 
 I can assist you with:
 - Investigating specific parcel conflicts (e.g. Parcel P-0102)

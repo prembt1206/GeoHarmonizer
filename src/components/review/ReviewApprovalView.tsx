@@ -1,4 +1,4 @@
-// GeoRecon AI - Human-in-the-Loop Review & Approval (SIH26013 - Section 19)
+// GeoHarmonizer AI - Human-in-the-Loop Review & Approval (SIH26013 - Section 19)
 
 import React, { useState } from 'react';
 import {
@@ -58,7 +58,7 @@ export const ReviewApprovalView: React.FC = () => {
           Review & Approval Queue
         </h1>
         <p className="mt-1 text-xs text-slate-500 dark:text-slate-400 max-w-3xl leading-relaxed">
-          GeoRecon AI never makes autonomous decisions for low-confidence or disputed land records. When multi-source variances exceed automatic thresholds, cases are routed to designated municipal and revenue officers for review, evidence scrutiny, and statutory sign-off.
+          GeoHarmonizer AI never makes autonomous decisions for low-confidence or disputed land records. When multi-source variances exceed automatic thresholds, cases are routed to designated municipal and revenue officers for review, evidence scrutiny, and statutory sign-off.
         </p>
       </div>
 

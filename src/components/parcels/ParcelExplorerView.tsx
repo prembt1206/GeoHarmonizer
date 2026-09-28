@@ -1,4 +1,4 @@
-// GeoRecon AI - Interactive Parcel Explorer (SIH26013 - Section 20)
+// GeoHarmonizer AI - Interactive Parcel Explorer (SIH26013 - Section 20)
 
 import React, { useState } from 'react';
 import {

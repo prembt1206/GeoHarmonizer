@@ -1,5 +1,5 @@
 -- ==============================================================================
--- GeoRecon AI: Multi-Source Geospatial Harmonization for Urban Land Records
+-- GeoHarmonizer AI: Multi-Source Geospatial Harmonization for Urban Land Records
 -- Smart India Hackathon 2026 (SIH26013) - Supabase Cloud PostgreSQL Schema
 -- Migration: 001_initial_schema.sql
 -- ==============================================================================

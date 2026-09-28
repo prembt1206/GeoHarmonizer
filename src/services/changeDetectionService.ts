@@ -1,4 +1,4 @@
-// GeoRecon AI - Temporal Change Detection Service (SIH26013)
+// GeoHarmonizer AI - Temporal Change Detection Service (SIH26013)
 // Compares baseline year (2025) vs current survey (2026) to detect real-world physical changes
 
 import { TemporalChange } from '../types/geospatial';

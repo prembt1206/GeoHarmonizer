@@ -1,4 +1,4 @@
-// GeoRecon AI - Explainable Confidence Engine View (SIH26013 - Sections 18 & 39)
+// GeoHarmonizer AI - Explainable Confidence Engine View (SIH26013 - Sections 18 & 39)
 
 import React, { useState } from 'react';
 import {
@@ -58,7 +58,7 @@ export const ConfidenceEngineView: React.FC = () => {
           Confidence Engine & Explainability Matrix
         </h1>
         <p className="mt-1 text-xs text-slate-500 dark:text-slate-400 max-w-3xl leading-relaxed">
-          GeoRecon AI guarantees auditable decisions by decomposing parcel confidence into five transparent, quantifiable factors. Records above the automated approval threshold ({autoThresh}%) lock automatically into the canonical layer, while uncertain records are channeled to human administrative review.
+          GeoHarmonizer AI guarantees auditable decisions by decomposing parcel confidence into five transparent, quantifiable factors. Records above the automated approval threshold ({autoThresh}%) lock automatically into the canonical layer, while uncertain records are channeled to human administrative review.
         </p>
       </div>
 

@@ -1,4 +1,4 @@
-// GeoRecon AI - Comprehensive Parcel Detail Drawer (SIH26013 - Section 20)
+// GeoHarmonizer AI - Comprehensive Parcel Detail Drawer (SIH26013 - Section 20)
 
 import React, { useState } from 'react';
 import {

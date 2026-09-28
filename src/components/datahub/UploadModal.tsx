@@ -1,4 +1,4 @@
-// GeoRecon AI - Multi-Source Data Ingestion Wizard (SIH26013 - Section 8)
+// GeoHarmonizer AI - Multi-Source Data Ingestion Wizard (SIH26013 - Section 8)
 
 import React, { useState } from 'react';
 import {

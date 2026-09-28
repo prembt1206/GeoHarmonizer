@@ -1,4 +1,4 @@
-// GeoRecon AI - Geospatial Analytics & Quality Benchmarking (SIH26013 - Section 24)
+// GeoHarmonizer AI - Geospatial Analytics & Quality Benchmarking (SIH26013 - Section 24)
 
 import React from 'react';
 import {
@@ -73,7 +73,7 @@ export const AnalyticsView: React.FC = () => {
         />
       </div>
 
-      {/* Comparative Analysis: Manual GIS vs GeoRecon AI (Section 24) */}
+      {/* Comparative Analysis: Manual GIS vs GeoHarmonizer AI (Section 24) */}
       <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-6 shadow-sm space-y-4">
         <div className="flex items-center justify-between pb-3 border-b border-slate-200 dark:border-slate-800">
           <div>
@@ -81,7 +81,7 @@ export const AnalyticsView: React.FC = () => {
               Operational Efficiency Benchmark (Prototype Simulation)
             </span>
             <h3 className="text-sm font-bold text-slate-900 dark:text-white mt-0.5">
-              Manual GIS Reconciliation vs. AI-Assisted GeoRecon
+              Manual GIS Reconciliation vs. AI-Assisted GeoHarmonizer
             </h3>
           </div>
           <span className="text-[11px] text-slate-400 italic">
@@ -93,7 +93,7 @@ export const AnalyticsView: React.FC = () => {
           {/* Manual GIS Legacy Workflow */}
           <div className="p-4 rounded-xl bg-slate-50 dark:bg-slate-850/60 border border-slate-200 dark:border-slate-800 space-y-3">
             <span className="font-bold text-slate-700 dark:text-slate-300 block text-xs uppercase">
-              Manual GIS Processing (Before GeoRecon)
+              Manual GIS Processing (Before GeoHarmonizer)
             </span>
             <div className="space-y-2 text-slate-600 dark:text-slate-400">
               <div className="flex justify-between">
@@ -115,11 +115,11 @@ export const AnalyticsView: React.FC = () => {
             </div>
           </div>
 
-          {/* AI-Assisted GeoRecon AI Workflow */}
+          {/* AI-Assisted GeoHarmonizer AI Workflow */}
           <div className="p-4 rounded-xl bg-gradient-to-r from-emerald-50/80 to-sky-50/80 dark:from-emerald-950/20 dark:to-sky-950/20 border border-emerald-300 dark:border-emerald-800/80 space-y-3">
             <span className="font-bold text-emerald-800 dark:text-emerald-300 block text-xs uppercase flex items-center gap-1.5">
               <Sparkles className="w-3.5 h-3.5" />
-              <span>AI-Assisted Harmonization (With GeoRecon)</span>
+              <span>AI-Assisted Harmonization (With GeoHarmonizer)</span>
             </span>
             <div className="space-y-2 text-slate-700 dark:text-slate-300">
               <div className="flex justify-between">

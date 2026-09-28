@@ -1,4 +1,4 @@
-// GeoRecon AI - Intelligent Gemini Geospatial Copilot (SIH26013)
+// GeoHarmonizer AI - Intelligent Gemini Geospatial Copilot (SIH26013)
 
 import React, { useState, useRef, useEffect } from 'react';
 import {
@@ -30,11 +30,11 @@ import {
 } from '../../services/geminiChatService';
 
 const SUGGESTED_PROMPTS = [
-  { label: '🛸 UAV Drone Survey', query: 'Explain how the 5cm UAV Drone photogrammetry survey, flight trajectory, and DGPS GCP calibration works in GeoRecon AI for Bengaluru cadastral validation.' },
+  { label: '🛸 UAV Drone Survey', query: 'Explain how the 5cm UAV Drone photogrammetry survey, flight trajectory, and DGPS GCP calibration works in GeoHarmonizer AI for Bengaluru cadastral validation.' },
   { label: '🔍 Explain P-0102 Conflict', query: 'Why does Parcel P-0102 have a boundary conflict and what is the recommended resolution?' },
   { label: '📐 Explain IoU Matching', query: 'How does Intersection over Union (IoU) and Hausdorff distance work in matching cadastral vs drone layers?' },
   { label: '⚠️ Topology Anomalies', query: 'What topology issues exist in the current Bengaluru dataset and how are slivers healed?' },
-  { label: '🏆 SIH26013 Judge Overview', query: 'Give me a 60-second executive pitch for Smart India Hackathon judges explaining GeoRecon AI.' }
+  { label: '🏆 SIH26013 Judge Overview', query: 'Give me a 60-second executive pitch for Smart India Hackathon judges explaining GeoHarmonizer AI.' }
 ];
 
 export const GeoReconChatbot: React.FC = () => {
@@ -67,7 +67,7 @@ export const GeoReconChatbot: React.FC = () => {
     {
       id: 'init-1',
       role: 'assistant',
-      content: `### Welcome to GeoRecon Copilot 🛰️
+      content: `### Welcome to GeoHarmonizer Copilot 🛰️
 I am your **Gemini 3.8 Flash AI Geospatial Assistant** for **Smart India Hackathon SIH26013**.
 
 I have real-time access to the **Bengaluru Urban Land Records Sector (Indiranagar / Domlur)** (${parcels.length} parcels, ${conflicts.filter(c => c.status === 'open').length} open conflicts, EPSG:32643).
@@ -255,14 +255,14 @@ Ask me about:
           <button
             onClick={() => setIsOpen(true)}
             className="flex items-center gap-2.5 pl-3.5 pr-4 py-2.5 rounded-full bg-gradient-to-r from-sky-600 via-indigo-600 to-purple-600 hover:from-sky-500 hover:via-indigo-500 hover:to-purple-500 text-white shadow-xl shadow-sky-600/30 border border-sky-400/40 transition-all hover:scale-105 active:scale-95 animate-in fade-in"
-            title="Open GeoRecon AI Copilot"
+            title="Open GeoHarmonizer AI Copilot"
           >
             <div className="relative">
               <Sparkles className="w-5 h-5 text-amber-300 animate-spin-slow" />
               <span className="absolute -top-1 -right-1 w-2.5 h-2.5 bg-emerald-400 rounded-full border-2 border-slate-900"></span>
             </div>
             <div className="text-left">
-              <span className="block text-xs font-bold tracking-tight">GeoRecon Copilot</span>
+              <span className="block text-xs font-bold tracking-tight">GeoHarmonizer Copilot</span>
               <span className="block text-[10px] text-sky-200 font-medium">Gemini 3.8 Flash Live</span>
             </div>
           </button>
@@ -284,7 +284,7 @@ Ask me about:
               </div>
               <div>
                 <div className="flex items-center gap-1.5">
-                  <h3 className="text-xs font-bold tracking-tight">GeoRecon Copilot</h3>
+                  <h3 className="text-xs font-bold tracking-tight">GeoHarmonizer Copilot</h3>
                   <span className="px-1.5 py-0.2 rounded text-[9px] font-bold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 flex items-center gap-1">
                     <span className="w-1 h-1 rounded-full bg-emerald-400 animate-ping"></span>
                     Gemini 3.8 Flash
@@ -350,7 +350,7 @@ Ask me about:
                       ) : (
                         <>
                           <Bot className="w-3 h-3 text-indigo-400" />
-                          <span>GeoRecon Copilot</span>
+                          <span>GeoHarmonizer Copilot</span>
                           <span className="text-[9px] text-slate-500">{msg.timestamp}</span>
                         </>
                       )}
@@ -444,7 +444,7 @@ Ask me about:
                       type="text"
                       value={input}
                       onChange={e => setInput(e.target.value)}
-                      placeholder={isListening ? 'Listening...' : 'Ask GeoRecon Copilot anything...'}
+                      placeholder={isListening ? 'Listening...' : 'Ask GeoHarmonizer Copilot anything...'}
                       className="w-full px-3.5 py-2.5 pl-3.5 pr-8 rounded-xl bg-slate-800/90 border border-slate-700 text-xs text-white placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500"
                     />
                     <button
@@ -487,3 +487,5 @@ Ask me about:
     </>
   );
 };
+
+export const GeoHarmonizerChatbot = GeoReconChatbot;

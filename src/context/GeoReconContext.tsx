@@ -1,4 +1,4 @@
-// GeoRecon AI - Global State Management Context (SIH26013)
+// GeoHarmonizer AI - Global State Management Context (SIH26013)
 
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import confetti from 'canvas-confetti';
@@ -174,7 +174,7 @@ export const GeoReconProvider: React.FC<{ children: ReactNode }> = ({ children }
               });
               return merged;
             });
-            console.log(`[GeoRecon AI] Synchronized ${cloudParcels.length} parcels from Supabase Cloud`);
+            console.log(`[GeoHarmonizer AI] Synchronized ${cloudParcels.length} parcels from Supabase Cloud`);
           }
           if (cloudDatasets && cloudDatasets.length > 0) {
             setDatasets(prev => {
@@ -185,7 +185,7 @@ export const GeoReconProvider: React.FC<{ children: ReactNode }> = ({ children }
               });
               return merged;
             });
-            console.log(`[GeoRecon AI] Synchronized ${cloudDatasets.length} datasets from Supabase Cloud`);
+            console.log(`[GeoHarmonizer AI] Synchronized ${cloudDatasets.length} datasets from Supabase Cloud`);
           }
           if (cloudConflicts && cloudConflicts.length > 0) {
             setConflicts(prev => {
@@ -196,11 +196,11 @@ export const GeoReconProvider: React.FC<{ children: ReactNode }> = ({ children }
               });
               return merged;
             });
-            console.log(`[GeoRecon AI] Synchronized ${cloudConflicts.length} conflicts from Supabase Cloud`);
+            console.log(`[GeoHarmonizer AI] Synchronized ${cloudConflicts.length} conflicts from Supabase Cloud`);
           }
         }
       } catch (err) {
-        console.warn('[GeoRecon AI] Using local state fallback:', err);
+        console.warn('[GeoHarmonizer AI] Using local state fallback:', err);
       }
     }
 
@@ -451,3 +451,6 @@ export const useGeoRecon = () => {
   }
   return context;
 };
+
+export const useGeoHarmonizer = useGeoRecon;
+export const GeoHarmonizerProvider = GeoReconProvider;

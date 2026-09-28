@@ -1,4 +1,4 @@
-// GeoRecon AI - Intelligent Attribute Mapping Service (SIH26013)
+// GeoHarmonizer AI - Intelligent Attribute Mapping Service (SIH26013)
 // Reconciles heterogeneous departmental schemas to Canonical Land Record Model
 
 import { AttributeMappingProposal } from '../types/geospatial';

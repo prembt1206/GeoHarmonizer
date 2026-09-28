@@ -1,4 +1,4 @@
-// GeoRecon AI - Common Status Badge & Metric Card Components
+// GeoHarmonizer AI - Common Status Badge & Metric Card Components
 
 import React from 'react';
 import { LucideIcon } from 'lucide-react';

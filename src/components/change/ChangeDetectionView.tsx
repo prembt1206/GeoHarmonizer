@@ -1,4 +1,4 @@
-// GeoRecon AI - Temporal Change Detection View (SIH26013 - Section 16)
+// GeoHarmonizer AI - Temporal Change Detection View (SIH26013 - Section 16)
 
 import React, { useState } from 'react';
 import {

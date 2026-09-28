@@ -1,4 +1,4 @@
-// GeoRecon AI - Professional GIS Map Legend Component (SIH26013)
+// GeoHarmonizer AI - Professional GIS Map Legend Component (SIH26013)
 
 import React, { useState } from 'react';
 import { HelpCircle, ChevronDown, ChevronUp } from 'lucide-react';

@@ -1,4 +1,4 @@
-// GeoRecon AI - Coordinate Reference & Georeferencing Engine (SIH26013 - Section 10)
+// GeoHarmonizer AI - Coordinate Reference & Georeferencing Engine (SIH26013 - Section 10)
 
 import React, { useState } from 'react';
 import {

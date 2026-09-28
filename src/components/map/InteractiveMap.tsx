@@ -1,4 +1,4 @@
-// GeoRecon AI - Interactive Real GIS Parcel Map (SIH26013)
+// GeoHarmonizer AI - Interactive Real GIS Parcel Map (SIH26013)
 // Supported Real Basemaps: Esri High-Res Satellite, Hybrid, OpenStreetMap, CartoDB
 
 import React, { useEffect, useRef, useState, useCallback } from 'react';

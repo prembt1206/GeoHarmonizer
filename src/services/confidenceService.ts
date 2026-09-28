@@ -1,4 +1,4 @@
-// GeoRecon AI - Explainable Geospatial Confidence Engine (SIH26013)
+// GeoHarmonizer AI - Explainable Geospatial Confidence Engine (SIH26013)
 // Calculates transparent, multi-factor confidence scores for harmonized records
 
 export interface ConfidenceFactors {

@@ -1,4 +1,4 @@
-// GeoRecon AI - Spatial Topology Validation & Correction Service (SIH26013)
+// GeoHarmonizer AI - Spatial Topology Validation & Correction Service (SIH26013)
 // Checks for overlaps, gaps, sliver polygons, self-intersections, duplicates and building encroachments
 
 import { TopologyIssue } from '../types/geospatial';

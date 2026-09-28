@@ -1,4 +1,4 @@
-// GeoRecon AI - Canonical Parcel Record View (SIH26013 - Section 21)
+// GeoHarmonizer AI - Canonical Parcel Record View (SIH26013 - Section 21)
 
 import React, { useState } from 'react';
 import {
@@ -44,7 +44,7 @@ export const CanonicalRecordsView: React.FC = () => {
               Canonical Harmonized Parcel Records
             </h1>
             <p className="mt-1 text-xs text-slate-500 dark:text-slate-400 max-w-3xl leading-relaxed">
-              The authoritative target data model of GeoRecon AI. Fuses revenue records, municipal property identifiers, drone photogrammetry, and geodetic CORS observations into explainable, legally auditable master records.
+              The authoritative target data model of GeoHarmonizer AI. Fuses revenue records, municipal property identifiers, drone photogrammetry, and geodetic CORS observations into explainable, legally auditable master records.
             </p>
           </div>
 

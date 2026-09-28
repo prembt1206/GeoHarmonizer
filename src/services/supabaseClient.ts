@@ -1,4 +1,4 @@
-// GeoRecon AI - Supabase Cloud Client Integration (SIH26013)
+// GeoHarmonizer AI - Supabase Cloud Client Integration (SIH26013)
 
 import { createClient } from '@supabase/supabase-js';
 import { Dataset, HarmonizedParcel, HarmonizationConflict } from '../types/geospatial';

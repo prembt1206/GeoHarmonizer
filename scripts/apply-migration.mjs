@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 // ==============================================================================
-// GeoRecon AI: Multi-Source Geospatial Harmonization (SIH26013)
+// GeoHarmonizer AI: Multi-Source Geospatial Harmonization (SIH26013)
 // Supabase Cloud PostgreSQL Migration Runner
 // ==============================================================================
 
@@ -19,7 +19,7 @@ const projectRoot = path.resolve(__dirname, '..');
 const migrationPath = path.join(projectRoot, 'supabase', 'migrations', '001_initial_schema.sql');
 
 console.log('\n' + '='.repeat(70));
-console.log('  GEORECON AI — SUPABASE CLOUD MIGRATION RUNNER (SIH26013)');
+console.log('  GEOHARMONIZER AI — SUPABASE CLOUD MIGRATION RUNNER (SIH26013)');
 console.log('='.repeat(70));
 
 // Determine database connection string
@@ -122,7 +122,7 @@ async function runMigration() {
     }
 
     console.log('\n' + '='.repeat(70));
-    console.log('  🎉 SUCCESS: GeoRecon AI Database is fully initialized on Supabase Cloud!');
+    console.log('  🎉 SUCCESS: GeoHarmonizer AI Database is fully initialized on Supabase Cloud!');
     console.log('='.repeat(70) + '\n');
   } catch (err) {
     console.error('\n❌ MIGRATION FAILED:');
